@@ -4,13 +4,15 @@ import java.util.List;
 public class Track {
 	private String name;
 	private double distance;
-	private double seconds;
+	private int seconds;
+	private int maxSeconds;
 	private List<Rocket> rockets;
 
-	public Track(String name, double distance, double seconds) {
+	public Track(String name, double distance, int maxSeconds) {
 		this.name = name;
 		this.distance = distance;
-		this.seconds = seconds;
+		this.seconds = 0;
+		this.maxSeconds = maxSeconds;
 		this.rockets = new ArrayList<Rocket>();
 	}
 
@@ -26,7 +28,11 @@ public class Track {
 		return this.seconds;
 	}
 
-	public void setSeconds(double seconds) {
+	public int getMaxSeconds() {
+		return this.maxSeconds;
+	}
+
+	public void setSeconds(int seconds) {
 		this.seconds = seconds;
 	}
 
@@ -34,4 +40,12 @@ public class Track {
 		this.rockets.add(rocket);
 	}
 
+	public void updateRockets() {
+		for (Rocket r : this.rockets)
+			r.update(this.seconds);
+	}
+
+	public void startRace() {
+		//while hasta que acabe O se quede sin combustible
+	}
 }

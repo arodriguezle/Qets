@@ -40,9 +40,7 @@ public class Rocket {
 	}
 
 	public void addPropeller(Propeller... propellers) {
-		for (Propeller p : propellers) {
+		for (Propeller p : propellers)
 			this.propellers.add(p);
-		}
 	}
-
 }
