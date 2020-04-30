@@ -26,6 +26,10 @@ public class Track {
 		return this.seconds;
 	}
 
+	public void setSeconds(double seconds) {
+		this.seconds = seconds;
+	}
+
 	public void addRocket(Rocket rocket) {
 		this.rockets.add(rocket);
 	}
