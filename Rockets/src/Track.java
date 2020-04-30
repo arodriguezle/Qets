@@ -46,6 +46,9 @@ public class Track {
 	}
 
 	public void startRace() {
-		//while hasta que acabe O se quede sin combustible
+		// while hasta que acabe O se quede sin combustible
+		while (this.seconds < this.maxSeconds) {
+
+		}
 	}
 }
