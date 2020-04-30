@@ -43,4 +43,31 @@ public class Rocket {
 		for (Propeller p : propellers)
 			this.propellers.add(p);
 	}
+
+	public void updateSpeed(int time) {
+		this.speed = speed + totalAceleration * time;
+	}
+
+	public void updateTotalAceleration() {
+		this.totalAceleration = 0;
+		for (Propeller p : propellers) {
+			this.totalAceleration += p.getActualAcceleration();
+		}
+	}
+
+	public void updateDistance(int time) {
+		this.distance = distance + speed * time + (1 / 2 * totalAceleration) * Math.pow(time, 2);
+	}
+
+	public void updateGas() {
+		this.gas -= 0.02 * Math.pow(speed, 2);
+	}
+
+	public void update(int time) {
+		updateTotalAceleration();
+		updateSpeed(time);
+		updateDistance(time);
+		updateGas();
+	}
+
 }
