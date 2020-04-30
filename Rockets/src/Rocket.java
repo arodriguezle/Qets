@@ -4,4 +4,6 @@ public class Rocket {
 	private int totalAceleration;
 	private Propulsor p1, p2, p3;
 	private int gas;
+
+
 }
