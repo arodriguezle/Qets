@@ -78,9 +78,12 @@ public class Rocket {
 
 	public void printPropieties() {
 		for (int i = 0; i <= 18; i++) {
-			float multi = (1 / (1 + i));
-			System.out.println("Multi = " + multi);
-			updatePropellersMultiplier(1 / (i + 1));
+			if (breakingRules(1) == false) {
+				double multi = (0.085);
+				updatePropellersMultiplier(multi);
+			} else {
+				updatePropellersMultiplier(0.0);
+			}
 			update(i);
 			System.out.println(
 					"Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration + "  ||  Gas= " + this.gas);
