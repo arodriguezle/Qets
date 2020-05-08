@@ -45,7 +45,7 @@ public class Rocket {
 	}
 
 	public void updateSpeed(int time) {
-		this.speed = speed + totalAceleration * time;
+		this.speed = speed + totalAceleration * 1;
 	}
 
 	public void updateTotalAceleration() {
@@ -55,7 +55,7 @@ public class Rocket {
 	}
 
 	public void updateDistance(int time) {
-		this.distance = distance + speed * time + (1 / 2 * totalAceleration) * Math.pow(time, 2);
+		this.distance = distance + speed * 1 + (1 / 2 * totalAceleration) * Math.pow(time, 2);
 	}
 
 	public void updateGas() {
@@ -71,21 +71,36 @@ public class Rocket {
 
 	public double getMaxAceleration() {
 		double maxAcc = 0;
-		for (Propeller p : propellers) 
+		for (Propeller p : propellers)
 			maxAcc += p.getMaxAcceleration();
 		return maxAcc;
 	}
 
 	public void printPropieties() {
-		System.out.println("Gasoline = " + gas);
-		System.out.println("Max acc. = " + getMaxAceleration()+"\n--------------");
-		for (int i = 0; i <= 10; i++) {
+		for (int i = 0; i <= 18; i++) {
+			float multi = (1 / (1 + i));
+			System.out.println("Multi=" + multi);
+			updatePropellersMultiplier(1 / (i + 1));
 			update(i);
-			System.out.println("Distance = " + this.distance+"--Gas= "+this.gas);
+			System.out.println(
+					"Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration + "  ||  Gas= " + this.gas);
 		}
 	}
 
-	public void algorithms() {
-		
+	public void algorithms(int time) {
+
+	}
+
+	private boolean breakingRules(int time) {
+		double speed = (this.speed + totalAceleration * (1));
+		if (this.gas - 0.02 * Math.pow(speed, 2) <= 0) {
+			return false;
+		}
+		return false;
+	}
+
+	private void updatePropellersMultiplier(double multiplier) {
+		for (Propeller p : propellers)
+			p.setActualAcceleration(p.getMaxAcceleration() * multiplier);
 	}
 }
