@@ -1,5 +1,5 @@
 public class Propeller {
-	
+
 	private double maxAceleration;
 	private double actualAceleration;
 

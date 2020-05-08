@@ -50,9 +50,8 @@ public class Rocket {
 
 	public void updateTotalAceleration() {
 		this.totalAceleration = 0;
-		for (Propeller p : propellers) {
+		for (Propeller p : propellers)
 			this.totalAceleration += p.getActualAcceleration();
-		}
 	}
 
 	public void updateDistance(int time) {
@@ -70,4 +69,23 @@ public class Rocket {
 		updateGas();
 	}
 
+	public double getMaxAceleration() {
+		double maxAcc = 0;
+		for (Propeller p : propellers) 
+			maxAcc += p.getMaxAcceleration();
+		return maxAcc;
+	}
+
+	public void printPropieties() {
+		System.out.println("Gasoline = " + gas);
+		System.out.println("Max acc. = " + getMaxAceleration()+"\n--------------");
+		for (int i = 0; i <= 10; i++) {
+			update(i);
+			System.out.println("Distance = " + this.distance+"--Gas= "+this.gas);
+		}
+	}
+
+	public void algorithms() {
+		
+	}
 }
