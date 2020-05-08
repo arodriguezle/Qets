@@ -94,7 +94,7 @@ public class Rocket {
 	private boolean breakingRules(int time) {
 		double speed = (this.speed + totalAceleration * (1));
 		if (this.gas - 0.02 * Math.pow(speed, 2) <= 0) {
-			return false;
+			return true;
 		}
 		return false;
 	}
