@@ -79,7 +79,7 @@ public class Rocket {
 	public void printPropieties() {
 		for (int i = 0; i <= 18; i++) {
 			float multi = (1 / (1 + i));
-			System.out.println("Multi=" + multi);
+			System.out.println("Multi = " + multi);
 			updatePropellersMultiplier(1 / (i + 1));
 			update(i);
 			System.out.println(
