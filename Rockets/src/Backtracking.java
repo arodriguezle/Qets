@@ -4,7 +4,7 @@ public class Backtracking {
 	
 	Rocket Qet;
 	Track trk;
-	Solucio sol;
+	Solucio sol, millorSol=null;
 	
 	public Backtracking(Rocket x, Track y) {
 		sol = new Solucio();
@@ -29,10 +29,27 @@ public class Backtracking {
 	
 	private boolean esSolucio() {
 		if (Qet.getGas()>0) {
-			if (Qet.getDistance()==trk.getDistance()) {
-				return true;
+			if (Qet.getDistance()>=trk.getDistance()) {
+				if (trk.getMaxSeconds()>=trk.getSeconds()){
+					return true;
+				}
 			}
 		}
+		return false;
+	}
+	
+	private boolean esMillor() {
+		if (millorSol==null) {
+			return true;
+		}
+		if (millorSol.acelerations.size()>sol.acelerations.size()) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean esAcceptable() {
+		// queda gas, aceleration nueva < max aceleration nueva > 0
 		return false;
 	}
 }
