@@ -12,11 +12,11 @@ public class Main {
 		track.addRocket(ViperX);
 		System.out.println("Select Algorithm:   (1=determinedSpeedAlgorithm||2=backtrackingAlgorithm");
 		scan = new Scanner(System.in);
-		if (Integer.valueOf(scan.next()) == DETERMINEDSPEEDALGORIHTM) {
+		if (Integer.valueOf(scan.next()) == DETERMINEDSPEEDALGORIHTM)
 			track.startRace(1);
-		} else if (Integer.valueOf(scan.next()) == BACKTRACKINGALGORITHM) {
+		else if (Integer.valueOf(scan.next()) == BACKTRACKINGALGORITHM)
 			track.startRace(2);
-		} else
+		else
 			throw new Exception("Not selected algorithm");
 
 	}
