@@ -7,6 +7,5 @@ public class Main {
 		Track track = new Track("FreeWorld", 1200.0, 18);
 		track.addRocket(ViperX);
 		ViperX.printPropieties();
-
 	}
 }
