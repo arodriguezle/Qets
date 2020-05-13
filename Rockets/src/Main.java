@@ -18,6 +18,7 @@ public class Main {
 			r.addPropeller(p1, p2);
 			track.addRocket(r);
 		}
+		//ENDS HERE
 		System.out.println("Select Algorithm:   (1=determinedSpeedAlgorithm   2=backtrackingAlgorithm)");
 		scan = new Scanner(System.in);
 		int selection = Integer.valueOf(scan.next());
