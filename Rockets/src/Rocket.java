@@ -76,22 +76,18 @@ public class Rocket {
 		return maxAcc;
 	}
 
-	public void printPropieties() {
-		for (int i = 0; i <= 18; i++) {
-			if (breakingRules(1) == false) {
-				double multi = (0.085);
-				updatePropellersMultiplier(multi);
-			} else {
-				updatePropellersMultiplier(0.0);
-			}
-			update(i);
-			System.out.println(
-					"Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration + "  ||  Gas= " + this.gas);
+	public void determinedAccelerationAlgorihtm(int time, double speed) throws Exception {
+		if (breakingRules(1) == false) {
+			if (speed <= this.getMaxAceleration())
+				updatePropllersTo(speed);
+			else
+				throw new Exception("Acceleration is higher than max acceleration!");
+		} else {
+			updatePropellersMultiplier(0.0);
 		}
-	}
-
-	public void algorithms(int time) {
-
+		update(time);
+		System.out.println(
+				"Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration + "  ||  Gas= " + this.gas);
 	}
 
 	private boolean breakingRules(int time) {
@@ -105,5 +101,22 @@ public class Rocket {
 	private void updatePropellersMultiplier(double multiplier) {
 		for (Propeller p : propellers)
 			p.setActualAcceleration(p.getMaxAcceleration() * multiplier);
+	}
+
+	private void updatePropllersTo(double speed) {
+		double remaining = speed;
+		for (Propeller p : propellers) {
+			if (remaining > 0) {
+				if (remaining > p.getMaxAcceleration()) {
+					p.setActualAcceleration(p.getActualAcceleration());
+					remaining = remaining - p.getMaxAcceleration();
+				} else {
+					p.setActualAcceleration(remaining);
+					remaining = 0;
+				}
+			} else {
+				p.setActualAcceleration(0.0);
+			}
+		}
 	}
 }
