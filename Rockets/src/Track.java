@@ -45,10 +45,13 @@ public class Track {
 			r.update(this.seconds);
 	}
 
-	public void startRace() {
-		// while hasta que acabe O se quede sin combustible
+	public void startRace(int i) throws Exception {
 		while (this.seconds < this.maxSeconds) {
-
+			for (Rocket rocket : rockets) {
+				if (i == 1)
+					rocket.determinedAccelerationAlgorihtm(this.seconds, 9.18);
+			}
+			this.seconds++;
 		}
 	}
 }
