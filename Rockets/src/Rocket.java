@@ -81,17 +81,20 @@ public class Rocket {
 			if (speed <= this.getMaxAceleration())
 				updatePropllersTo(speed);
 			else
-				throw new Exception("Acceleration is higher than max acceleration!");
+				updatePropllersTo(speed/2);
+				//throw new Exception("Acceleration is higher than max acceleration!");
 		} else {
 			updatePropellersMultiplier(0.0);
 		}
-		update(time);
-		System.out.println(
-				"Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration + "  ||  Gas= " + this.gas);
+		if (this.gas > 0) {
+			System.out.println(this.name + ":  Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration
+					+ "  ||  Gas= " + this.gas);
+			update(time);
+		}
 	}
 
 	private boolean breakingRules(int time) {
-		double speed = (this.speed + totalAceleration * (1));
+		double speed = (this.speed + totalAceleration * (time));
 		if (this.gas - 0.02 * Math.pow(speed, 2) <= 0) {
 			return true;
 		}

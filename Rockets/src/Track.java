@@ -46,12 +46,27 @@ public class Track {
 	}
 
 	public void startRace(int i) throws Exception {
+		System.out.println("---RACE  STARTED--- ");
+		System.out.println("---");
 		while (this.seconds < this.maxSeconds) {
+			System.out.println("Second " + (this.seconds + 1) + ":");
 			for (Rocket rocket : rockets) {
-				if (i == 1)
-					rocket.determinedAccelerationAlgorihtm(this.seconds, 9.18);
+				if (rocket.getDistance() < this.distance) {
+					if (rocket.getGas() <= 0) {
+						System.out.println(rocket.getName() + ": HAS NO GAS");
+					}
+					if (i == 1)
+						rocket.determinedAccelerationAlgorihtm(this.seconds, 9.18);
+					else if (i == 2)
+						throw new Exception("Not implemented yet");
+				} else {
+					System.out.println(rocket.getName() + ": FINISHED");
+				}
 			}
 			this.seconds++;
+			System.out.println("---");
 		}
+		System.out.println("---RACE FINISHED--- ");
+
 	}
 }
