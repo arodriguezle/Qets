@@ -5,7 +5,7 @@ public class Propeller {
 
 	public Propeller(double maxAcceleration) {
 		this.maxAceleration = maxAcceleration;
-		this.actualAceleration = 0;
+		this.actualAceleration = maxAcceleration;
 	}
 
 	public double getMaxAcceleration() {
