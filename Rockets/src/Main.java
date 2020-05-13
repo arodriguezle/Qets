@@ -18,6 +18,5 @@ public class Main {
 			track.startRace(2);
 		else
 			throw new Exception("Not selected algorithm");
-
 	}
 }
