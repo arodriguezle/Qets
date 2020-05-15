@@ -13,9 +13,9 @@ public class Backtracking {
 	}
 	
 	private class Solucio {
-		ArrayList<Double> acelerations;
+		ArrayList<Integer> acelerations;
 		public Solucio(){
-			acelerations = new ArrayList<Double>();
+			acelerations = new ArrayList<Integer>();
 		}
 		public String toString() {
 			int t = 0;
@@ -48,8 +48,44 @@ public class Backtracking {
 		return false;
 	}
 	
-	private boolean esAcceptable() {
-		// queda gas, aceleration nueva < max aceleration nueva > 0
+	private boolean esAcceptable(int i) {
+		if (Qet.getGas()>0) {
+			if(i < Qet.getMaxAceleration()  && i > 0) {
+				return true;
+			}
+		}
 		return false;
+	}
+	
+	private boolean esCompletable() {
+		if(Qet.getGas()>0) {
+			if(Qet.getDistance()<trk.getDistance()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void Backtracking() {
+		for(int i=1; i<Qet.getMaxAceleration(); i++) {
+			Integer value = new Integer(i);
+			if (esAcceptable(value)){
+				sol.acelerations.add(value);
+				if(esSolucio()) {
+					System.out.println("S'ha trobat una solucio");
+					if (esMillor()) {
+						millorSol = sol;
+						System.out.println(millorSol.toString());
+					}
+					sol.acelerations.remove(value);
+				}
+				else {
+					if (esCompletable()) {
+						Backtracking();
+					}
+					sol.acelerations.remove(value);
+				}
+			}
+		}
 	}
 }
