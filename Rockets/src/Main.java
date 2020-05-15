@@ -24,8 +24,9 @@ public class Main {
 		int selection = Integer.valueOf(scan.next());
 		if (selection == DETERMINEDSPEEDALGORIHTM)
 			track.startRace(1);
-		else if (selection == BACKTRACKINGALGORITHM)
-			track.startRace(2);
+		else if (selection == BACKTRACKINGALGORITHM) {
+			Backtracking p = new Backtracking(ViperX, track);
+		}	
 		else
 			throw new Exception("Not selected algorithm");
 	}
