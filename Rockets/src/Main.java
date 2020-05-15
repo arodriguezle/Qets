@@ -18,7 +18,7 @@ public class Main {
 			r.addPropeller(p1, p2);
 			track.addRocket(r);
 		}
-		//ENDS HERE
+		// ENDS HERE
 		System.out.println("Select Algorithm:   (1=determinedSpeedAlgorithm   2=backtrackingAlgorithm)");
 		scan = new Scanner(System.in);
 		int selection = Integer.valueOf(scan.next());
@@ -26,9 +26,9 @@ public class Main {
 			track.startRace(1);
 		else if (selection == BACKTRACKINGALGORITHM) {
 			Backtracking p = new Backtracking(ViperX, track);
-			p.Backtracking();
-		}	
-		else
+			p.Backtracking(0);
+			System.out.println(p.millorSol.toString());
+		} else
 			throw new Exception("Not selected algorithm");
 	}
 }
