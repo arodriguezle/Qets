@@ -68,25 +68,26 @@ public class Backtracking {
 		return false;
 	}
 
-	public void Backtracking(int iteration) {
-		for (int i = 0; i < Qet.getMaxAceleration(); i++) {
-			Integer value = new Integer(i);
-			System.out.println("ite ..." + iteration);
-			Qet.update(i);
-			if (esAcceptable(value)) {
-				sol.acelerations.add(value);
-				if (esSolucio()) {
-					System.out.println("S'ha trobat una solucio");
-					if (esMillor()) {
-						millorSol = sol;
-						System.out.println(millorSol.toString());
+	public void Backtracking() {
+		for (int t = 0; t <= 18; t++) {
+			for (int i = 0; i < Qet.getMaxAceleration(); i++) {
+				Integer value = new Integer(i);
+				if (esAcceptable(value)) {
+					sol.acelerations.add(value);
+					Qet.update(t);
+					if (esSolucio()) {
+						System.out.println("S'ha trobat una solucio");
+						if (esMillor()) {
+							millorSol = sol;
+							System.out.println(millorSol.toString());
+						}
+						sol.acelerations.remove(value);
+					} else {
+						if (esCompletable()) {
+							Backtracking();
+						}
+						sol.acelerations.remove(value);
 					}
-					sol.acelerations.remove(value);
-				} else {
-					if (esCompletable()) {
-						Backtracking(iteration + 1);
-					}
-					sol.acelerations.remove(value);
 				}
 			}
 		}

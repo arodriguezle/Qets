@@ -26,8 +26,7 @@ public class Main {
 			track.startRace(1);
 		else if (selection == BACKTRACKINGALGORITHM) {
 			Backtracking p = new Backtracking(ViperX, track);
-			p.Backtracking(0);
-			System.out.println(p.millorSol.toString());
+			p.Backtracking();
 		} else
 			throw new Exception("Not selected algorithm");
 	}
