@@ -11,7 +11,7 @@ public class Main {
 		Track track = new Track("FreeWorld", 1200.0, 18);
 		track.addRocket(ViperX);
 		// GENEREATES MORE ROCKETS
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 5; i++) {
 			Rocket r = new Rocket("Gen " + i, Math.round(Math.random() * 2500));
 			Propeller p1 = new Propeller(Math.round(Math.random() * 50)),
 					p2 = new Propeller(Math.round(Math.random() * 50));

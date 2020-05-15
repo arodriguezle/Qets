@@ -48,17 +48,20 @@ public class Track {
 	public void startRace(int i) throws Exception {
 		System.out.println("---RACE  STARTED--- ");
 		System.out.println("---");
-		while (this.seconds < this.maxSeconds) {
-			System.out.println("Second " + (this.seconds + 1) + ":");
+		boolean someoneLeft = true;
+		while (this.seconds <= this.maxSeconds && someoneLeft == true) {
+			someoneLeft = isSomeoneLeft();
+			System.out.println("Second " + (this.seconds) + ":");
 			for (Rocket rocket : rockets) {
 				if (rocket.getDistance() < this.distance) {
 					if (rocket.getGas() <= 0) {
 						System.out.println(rocket.getName() + ": HAS NO GAS");
 					}
-					if (i == 1)
+					if (i == 1) {
 						rocket.determinedAccelerationAlgorihtm(this.seconds, 9.18);
-					else if (i == 2)
+					} else if (i == 2) {
 						throw new Exception("Not implemented yet");
+					}
 				} else {
 					System.out.println(rocket.getName() + ": FINISHED");
 				}
@@ -67,6 +70,12 @@ public class Track {
 			System.out.println("---");
 		}
 		System.out.println("---RACE FINISHED--- ");
+	}
 
+	private boolean isSomeoneLeft() {
+		for (Rocket rocket : this.rockets)
+			if (rocket.getGas() > 0 && rocket.getDistance() < this.distance)
+				return true;
+		return false;
 	}
 }
