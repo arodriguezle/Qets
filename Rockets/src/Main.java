@@ -10,7 +10,7 @@ public class Main {
 		ViperX.addPropeller(propeller1, propeller2, propeller3);
 		Track track = new Track("FreeWorld", 1200.0, 18);
 		track.addRocket(ViperX);
-		System.out.println("Select Algorithm:   (1=determinedSpeedAlgorithm   2=backtrackingAlgorithm)");
+		System.out.println("Select Algorithm:  \n1 => determinedSpeedAlgorithm   \n2 => backtrackingAlgorithm (Not finished yet, it is for the next delivery)");
 		int selection = Integer.valueOf(scan.next());
 		if (selection == DETERMINEDSPEEDALGORIHTM)
 			startRace(track, 1);
