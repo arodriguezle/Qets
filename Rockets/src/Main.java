@@ -10,23 +10,13 @@ public class Main {
 		ViperX.addPropeller(propeller1, propeller2, propeller3);
 		Track track = new Track("FreeWorld", 1200.0, 18);
 		track.addRocket(ViperX);
-		// GENEREATES MORE ROCKETS
-		for (int i = 0; i < 5; i++) {
-			Rocket r = new Rocket("Gen " + i, Math.round(Math.random() * 2500));
-			Propeller p1 = new Propeller(Math.round(Math.random() * 50)),
-					p2 = new Propeller(Math.round(Math.random() * 50));
-			r.addPropeller(p1, p2);
-			track.addRocket(r);
-		}
-		// ENDS HERE
 		System.out.println("Select Algorithm:   (1=determinedSpeedAlgorithm   2=backtrackingAlgorithm)");
 		scan = new Scanner(System.in);
 		int selection = Integer.valueOf(scan.next());
 		if (selection == DETERMINEDSPEEDALGORIHTM)
 			track.startRace(1);
 		else if (selection == BACKTRACKINGALGORITHM) {
-			Backtracking p = new Backtracking(ViperX, track);
-			p.Backtracking();
+			track.startRace(2);
 		} else
 			throw new Exception("Not selected algorithm");
 	}

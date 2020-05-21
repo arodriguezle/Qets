@@ -55,7 +55,7 @@ public class Track {
 			for (Rocket rocket : rockets) {
 				if (rocket.getDistance() < this.distance) {
 					if (rocket.getGas() <= 0) {
-						System.out.println(rocket.getName() + ": HAS NO GAS");
+						System.out.println(rocket.getName() + ": HAS NO GAS at " + rocket.getDistance());
 					}
 					if (i == 1) {
 						rocket.determinedAccelerationAlgorihtm(this.seconds, 9.18);
@@ -63,7 +63,8 @@ public class Track {
 						throw new Exception("Not implemented yet");
 					}
 				} else {
-					System.out.println(rocket.getName() + ": FINISHED");
+					System.out.println(rocket.getName() + ": FINISHED at " + rocket.getDistance() + " with "
+							+ rocket.getGas() + " gas left");
 				}
 			}
 			this.seconds++;
