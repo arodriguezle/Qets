@@ -35,7 +35,7 @@ public class Main {
 					if (i == 1) {
 						rocket.determinedAccelerationAlgorihtm((int) track.getSeconds(), 9.18);
 					} else if (i == 2) {
-						throw new Exception("Not implemented yet");
+						throw new Exception("Not implemented yet, work in progress for the next delivery");
 					}
 				} else {
 					System.out.println(rocket.getName() + ": FINISHED at " + rocket.getDistance() + " with "

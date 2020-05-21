@@ -81,8 +81,7 @@ public class Rocket {
 			if (speed <= this.getMaxAceleration())
 				updatePropllersTo(speed);
 			else
-				updatePropllersTo(speed/2);
-				//throw new Exception("Acceleration is higher than max acceleration!");
+				throw new Exception("Acceleration is higher than max acceleration!");
 		} else {
 			updatePropellersMultiplier(0.0);
 		}
