@@ -81,7 +81,6 @@ public class Backtracking {
 							millorSol = sol;
 							System.out.println(millorSol.toString());
 						}
-						sol.acelerations.remove(value);
 					} else {
 						if (esCompletable()) {
 							Backtracking();
