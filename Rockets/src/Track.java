@@ -45,38 +45,11 @@ public class Track {
 			r.update(this.seconds);
 	}
 
-	public void startRace(int i) throws Exception {
-		System.out.println("---RACE  STARTED--- ");
-		System.out.println("---");
-		boolean someoneLeft = true;
-		while (this.seconds <= this.maxSeconds && someoneLeft == true) {
-			someoneLeft = isSomeoneLeft();
-			System.out.println("Second " + (this.seconds) + ":");
-			for (Rocket rocket : rockets) {
-				if (rocket.getDistance() < this.distance) {
-					if (rocket.getGas() <= 0) {
-						System.out.println(rocket.getName() + ": HAS NO GAS at " + rocket.getDistance());
-					}
-					if (i == 1) {
-						rocket.determinedAccelerationAlgorihtm(this.seconds, 9.18);
-					} else if (i == 2) {
-						throw new Exception("Not implemented yet");
-					}
-				} else {
-					System.out.println(rocket.getName() + ": FINISHED at " + rocket.getDistance() + " with "
-							+ rocket.getGas() + " gas left");
-				}
-			}
-			this.seconds++;
-			System.out.println("---");
-		}
-		System.out.println("---RACE FINISHED--- ");
+	public List<Rocket> getRockets() {
+		return this.rockets;
 	}
 
-	private boolean isSomeoneLeft() {
-		for (Rocket rocket : this.rockets)
-			if (rocket.getGas() > 0 && rocket.getDistance() < this.distance)
-				return true;
-		return false;
+	public void addSecond() {
+		this.seconds++;
 	}
 }

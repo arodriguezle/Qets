@@ -13,10 +13,45 @@ public class Main {
 		System.out.println("Select Algorithm:   (1=determinedSpeedAlgorithm   2=backtrackingAlgorithm)");
 		int selection = Integer.valueOf(scan.next());
 		if (selection == DETERMINEDSPEEDALGORIHTM)
-			track.startRace(1);
+			startRace(track, 1);
 		else if (selection == BACKTRACKINGALGORITHM) {
-			track.startRace(2);
+			startRace(track, 2);
 		} else
 			throw new Exception("Not selected algorithm");
+	}
+
+	public static void startRace(Track track, int i) throws Exception {
+		System.out.println("---RACE  STARTED--- ");
+		System.out.println("---");
+		boolean someoneLeft = true;
+		while (track.getSeconds() <= track.getMaxSeconds() && someoneLeft == true) {
+			someoneLeft = isSomeoneLeft(track);
+			System.out.println("Second " + (track.getSeconds()) + ":");
+			for (Rocket rocket : track.getRockets()) {
+				if (rocket.getDistance() < track.getDistance()) {
+					if (rocket.getGas() <= 0) {
+						System.out.println(rocket.getName() + ": HAS NO GAS at " + rocket.getDistance());
+					}
+					if (i == 1) {
+						rocket.determinedAccelerationAlgorihtm((int) track.getSeconds(), 9.18);
+					} else if (i == 2) {
+						throw new Exception("Not implemented yet");
+					}
+				} else {
+					System.out.println(rocket.getName() + ": FINISHED at " + rocket.getDistance() + " with "
+							+ rocket.getGas() + " gas left");
+				}
+			}
+			track.addSecond();
+			System.out.println("---");
+		}
+		System.out.println("---RACE FINISHED--- ");
+	}
+
+	private static boolean isSomeoneLeft(Track track) {
+		for (Rocket rocket : track.getRockets())
+			if (rocket.getGas() > 0 && rocket.getDistance() < track.getDistance())
+				return true;
+		return false;
 	}
 }
