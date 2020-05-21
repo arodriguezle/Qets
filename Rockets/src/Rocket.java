@@ -55,7 +55,7 @@ public class Rocket {
 	}
 
 	public void updateDistance(int time) {
-		this.distance = distance + speed * 1 + (1 / 2 * totalAceleration) * Math.pow(time, 2);
+		this.distance = distance + speed + (1 / 2 * totalAceleration) * Math.pow(time, 2);
 	}
 
 	public void updateGas() {

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 	private static int DETERMINEDSPEEDALGORIHTM = 1, BACKTRACKINGALGORITHM = 2;
@@ -10,7 +11,8 @@ public class Main {
 		ViperX.addPropeller(propeller1, propeller2, propeller3);
 		Track track = new Track("FreeWorld", 1200.0, 18);
 		track.addRocket(ViperX);
-		System.out.println("Select Algorithm:  \n1 => determinedSpeedAlgorithm   \n2 => backtrackingAlgorithm (Not finished yet, it is for the next delivery)");
+		System.out.println(
+				"Select Algorithm:  \n1 => determinedSpeedAlgorithm   \n2 => backtrackingAlgorithm (Not finished yet, it is for the next delivery)");
 		int selection = Integer.valueOf(scan.next());
 		if (selection == DETERMINEDSPEEDALGORIHTM)
 			startRace(track, 1);
@@ -25,6 +27,7 @@ public class Main {
 		System.out.println("---");
 		boolean someoneLeft = true;
 		while (track.getSeconds() <= track.getMaxSeconds() && someoneLeft == true) {
+			TimeUnit.SECONDS.sleep(1);
 			someoneLeft = isSomeoneLeft(track);
 			System.out.println("Second " + (track.getSeconds()) + ":");
 			for (Rocket rocket : track.getRockets()) {
