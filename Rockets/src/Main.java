@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
 	private static int DETERMINEDSPEEDALGORIHTM = 1, BACKTRACKINGALGORITHM = 2;
-	private static Scanner scan;
+	private static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) throws Exception {
 		Rocket ViperX = new Rocket("Viper X", 2500.0);
@@ -11,7 +11,6 @@ public class Main {
 		Track track = new Track("FreeWorld", 1200.0, 18);
 		track.addRocket(ViperX);
 		System.out.println("Select Algorithm:   (1=determinedSpeedAlgorithm   2=backtrackingAlgorithm)");
-		scan = new Scanner(System.in);
 		int selection = Integer.valueOf(scan.next());
 		if (selection == DETERMINEDSPEEDALGORIHTM)
 			track.startRace(1);
