@@ -2,6 +2,7 @@ package CapaAplication;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Track {
 	private String name;
@@ -24,6 +25,42 @@ public class Track {
 		this.rockets = new ArrayList<Rocket>();
 	}
 
+	public void startRace(Track track, int algorithm) throws Exception {
+		System.out.println("---RACE  STARTED--- ");
+		System.out.println("---");
+		boolean someoneLeft = true;
+		while (track.getSeconds() <= track.getMaxSeconds() && someoneLeft == true) {
+			TimeUnit.SECONDS.sleep(1);
+			someoneLeft = isSomeoneLeft(track);
+			System.out.println("Second " + (track.getSeconds()) + ":");
+			for (Rocket rocket : track.getRockets()) {
+				if (rocket.getDistance() < track.getDistance()) {
+					if (rocket.getGas() <= 0) {
+						System.out.println(rocket.getName() + ": HAS NO GAS at " + rocket.getDistance());
+					}
+					if (algorithm == 1) {
+						rocket.determinedAccelerationAlgorihtm((int) track.getSeconds(), 9.18);
+					} else if (algorithm == 2) {
+						throw new Exception("Not implemented yet, work in progress for the next delivery");
+					}
+				} else {
+					System.out.println(rocket.getName() + ": FINISHED at " + rocket.getDistance() + " with "
+							+ rocket.getGas() + " gas left");
+				}
+			}
+			track.addSecond();
+			System.out.println("---");
+		}
+		System.out.println("---RACE FINISHED--- ");
+	}
+
+	private static boolean isSomeoneLeft(Track track) throws Exception {
+		for (Rocket rocket : track.getRockets())
+			if (rocket.getGas() > 0 && rocket.getDistance() < track.getDistance())
+				return true;
+		return false;
+	}
+
 	public String getName() {
 		return this.name;
 	}
@@ -38,13 +75,6 @@ public class Track {
 
 	public int getMaxSeconds() {
 		return this.maxSeconds;
-	}
-
-	public void setSeconds(int seconds) throws Exception {
-		if (seconds < 0)
-			this.seconds = seconds;
-		else
-			throw new Exception("Seconds is lower than 0!");
 	}
 
 	public void addRocket(Rocket rocket) throws Exception {
