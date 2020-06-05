@@ -4,7 +4,7 @@ import CapaAplication.*;
 import java.util.Scanner;
 
 public class Main {
-	private static int DETERMINEDSPEEDALGORIHTM = 1, BACKTRACKINGALGORITHM = 2;
+	private static int DETERMINED_SPEED_ALGORIHTM = 1, BACKTRACKING_ALGORITHM = 2;
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) throws Exception {
@@ -20,9 +20,9 @@ public class Main {
 		System.out.println(
 				"Select Algorithm:  \n1 => determinedSpeedAlgorithm   \n2 => backtrackingAlgorithm (Not finished yet, it is for the next delivery)");
 		int selection = Integer.valueOf(scan.next());
-		if (selection == DETERMINEDSPEEDALGORIHTM)
+		if (selection == DETERMINED_SPEED_ALGORIHTM)
 			track.startRace(track, 1);
-		else if (selection == BACKTRACKINGALGORITHM) {
+		else if (selection == BACKTRACKING_ALGORITHM) {
 			track.startRace(track, 2);
 		} else
 			throw new Exception("Not selected algorithm");
