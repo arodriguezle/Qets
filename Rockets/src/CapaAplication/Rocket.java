@@ -91,7 +91,7 @@ public class Rocket {
 	}
 
 	public double getMaxAceleration() {
-		double maxAcc = 0;
+		int maxAcc = 0;
 		for (Propellant p : propellants)
 			if (p.getMaxAcceleration() > maxAcc)
 				maxAcc = p.getMaxAcceleration();
