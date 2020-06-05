@@ -8,9 +8,9 @@ public class Rocket {
 	private double distance;
 	private double totalAceleration;
 	private List<Propeller> propellers;
-	private double gas;
+	private GasTank gas;
 
-	public Rocket(String name, double gas) {
+	public Rocket(String name, GasTank gas) {
 		this.name = name;
 		this.gas = gas;
 		this.speed = 0;
@@ -24,7 +24,7 @@ public class Rocket {
 	}
 
 	public double getGas() {
-		return this.gas;
+		return this.gas.getGas();
 	}
 
 	public double getSpeed() {
@@ -59,7 +59,7 @@ public class Rocket {
 	}
 
 	public void updateGas() {
-		this.gas -= 0.02 * Math.pow(speed, 2);
+		this.gas.setGas(this.gas.getGas() - 0.02 * Math.pow(speed, 2));
 	}
 
 	public void update(int time) {
@@ -77,7 +77,8 @@ public class Rocket {
 	}
 
 	public void determinedAccelerationAlgorihtm(int time, double speed) throws Exception {
-		if (breakingRules(1) == false) {
+		if (this.gas.getGas() - 0.02 * Math.pow(this.speed + totalAceleration * (time), 2) > 0) {
+			// if with the new acceleration the gas will be greater than 0
 			if (speed <= this.getMaxAceleration())
 				updatePropllersTo(speed);
 			else
@@ -85,19 +86,11 @@ public class Rocket {
 		} else {
 			updatePropellersMultiplier(0.0);
 		}
-		if (this.gas > 0) {
+		if (this.gas.getGas() > 0) {
 			System.out.println(this.name + ":  Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration
-					+ "  ||  Gas= " + this.gas);
+					+ "  ||  Gas= " + this.gas.getGas());
 			update(time);
 		}
-	}
-
-	private boolean breakingRules(int time) {
-		double speed = (this.speed + totalAceleration * (time));
-		if (this.gas - 0.02 * Math.pow(speed, 2) <= 0) {
-			return true;
-		}
-		return false;
 	}
 
 	private void updatePropellersMultiplier(double multiplier) {

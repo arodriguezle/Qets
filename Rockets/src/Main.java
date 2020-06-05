@@ -6,8 +6,11 @@ public class Main {
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) throws Exception {
-		Rocket ViperX = new Rocket("Viper X", 2500.0);
-		Propeller propeller1 = new Propeller(50.0), propeller2 = new Propeller(20.0), propeller3 = new Propeller(38.0);
+		GasTank gas = new GasTank(2500.0);
+		Rocket ViperX = new Rocket("Viper X", gas);
+		Propeller propeller1 = new Propeller(50.0);
+		Propeller propeller2 = new Propeller(20.0);
+		Propeller propeller3 = new Propeller(38.0);
 		ViperX.addPropeller(propeller1, propeller2, propeller3);
 		Track track = new Track("FreeWorld", 1200.0, 18);
 		track.addRocket(ViperX);
@@ -22,7 +25,7 @@ public class Main {
 			throw new Exception("Not selected algorithm");
 	}
 
-	public static void startRace(Track track, int i) throws Exception {
+	public static void startRace(Track track, int algorithm) throws Exception {
 		System.out.println("---RACE  STARTED--- ");
 		System.out.println("---");
 		boolean someoneLeft = true;
@@ -35,9 +38,9 @@ public class Main {
 					if (rocket.getGas() <= 0) {
 						System.out.println(rocket.getName() + ": HAS NO GAS at " + rocket.getDistance());
 					}
-					if (i == 1) {
+					if (algorithm == 1) {
 						rocket.determinedAccelerationAlgorihtm((int) track.getSeconds(), 9.18);
-					} else if (i == 2) {
+					} else if (algorithm == 2) {
 						throw new Exception("Not implemented yet, work in progress for the next delivery");
 					}
 				} else {
