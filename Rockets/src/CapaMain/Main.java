@@ -1,4 +1,5 @@
 package CapaMain;
+
 import CapaAplication.*;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -8,12 +9,13 @@ public class Main {
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) throws Exception {
-		GasTank gas = new GasTank(2500.0);
-		Rocket ViperX = new Rocket("Viper X", gas);
-		Propeller propeller1 = new Propeller(50.0);
-		Propeller propeller2 = new Propeller(20.0);
-		Propeller propeller3 = new Propeller(38.0);
-		ViperX.addPropeller(propeller1, propeller2, propeller3);
+		Rocket ViperX = new Rocket("Viper X");
+		GasTank gasTank = new GasTank(2500.0);
+		ViperX.addGasTank(gasTank);
+		Propellant propeller1 = new Propellant(50.0);
+		Propellant propeller2 = new Propellant(20.0);
+		Propellant propeller3 = new Propellant(38.0);
+		ViperX.addPropellants(propeller1, propeller2, propeller3);
 		Track track = new Track("FreeWorld", 1200.0, 18);
 		track.addRocket(ViperX);
 		System.out.println(
@@ -56,7 +58,7 @@ public class Main {
 		System.out.println("---RACE FINISHED--- ");
 	}
 
-	private static boolean isSomeoneLeft(Track track) {
+	private static boolean isSomeoneLeft(Track track) throws Exception {
 		for (Rocket rocket : track.getRockets())
 			if (rocket.getGas() > 0 && rocket.getDistance() < track.getDistance())
 				return true;

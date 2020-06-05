@@ -1,10 +1,11 @@
 package CapaAplication;
-public class Propeller {
+
+public class Propellant {
 
 	private double maxAceleration;
 	private double actualAceleration;
 
-	public Propeller(double maxAcceleration) {
+	public Propellant(double maxAcceleration) {
 		this.maxAceleration = maxAcceleration;
 		this.actualAceleration = maxAcceleration;
 	}

@@ -1,4 +1,5 @@
 package CapaAplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,24 +9,43 @@ public class Rocket {
 	private double speed;
 	private double distance;
 	private double totalAceleration;
-	private List<Propeller> propellers;
-	private GasTank gas;
+	private List<Propellant> propellants;
+	private GasTank gasTank;
 
-	public Rocket(String name, GasTank gas) {
+	public Rocket(String name, GasTank gasTank) throws Exception {
 		this.name = name;
-		this.gas = gas;
+		if (gasTank != null)
+			this.gasTank = gasTank;
+		else
+			throw new Exception("Gas Tank is null!");
 		this.speed = 0;
 		this.distance = 0;
 		this.totalAceleration = 0;
-		this.propellers = new ArrayList<Propeller>();
+		this.propellants = new ArrayList<Propellant>();
+	}
+
+	public Rocket(String name) throws Exception {
+		this.name = name;
+		this.gasTank = null;
+		this.speed = 0;
+		this.distance = 0;
+		this.totalAceleration = 0;
+		this.propellants = new ArrayList<Propellant>();
+	}
+
+	public void addGasTank(GasTank gasTank) {
+		this.gasTank = gasTank;
 	}
 
 	public String getName() {
 		return this.name;
 	}
 
-	public double getGas() {
-		return this.gas.getGas();
+	public double getGas() throws Exception {
+		if (this.gasTank != null)
+			return this.gasTank.getGas();
+		else
+			throw new Exception("Gas Tank is null!");
 	}
 
 	public double getSpeed() {
@@ -40,9 +60,9 @@ public class Rocket {
 		return this.totalAceleration;
 	}
 
-	public void addPropeller(Propeller... propellers) {
-		for (Propeller p : propellers)
-			this.propellers.add(p);
+	public void addPropellants(Propellant... propellants) {
+		for (Propellant p : propellants)
+			this.propellants.add(p);
 	}
 
 	public void updateSpeed(int time) {
@@ -51,7 +71,7 @@ public class Rocket {
 
 	public void updateTotalAceleration() {
 		this.totalAceleration = 0;
-		for (Propeller p : propellers)
+		for (Propellant p : propellants)
 			this.totalAceleration += p.getActualAcceleration();
 	}
 
@@ -60,7 +80,7 @@ public class Rocket {
 	}
 
 	public void updateGas() {
-		this.gas.setGas(this.gas.getGas() - 0.02 * Math.pow(speed, 2));
+		this.gasTank.setGas(this.gasTank.getGas() - 0.02 * Math.pow(speed, 2));
 	}
 
 	public void update(int time) {
@@ -72,36 +92,36 @@ public class Rocket {
 
 	public double getMaxAceleration() {
 		double maxAcc = 0;
-		for (Propeller p : propellers)
+		for (Propellant p : propellants)
 			maxAcc += p.getMaxAcceleration();
 		return maxAcc;
 	}
 
 	public void determinedAccelerationAlgorihtm(int time, double speed) throws Exception {
-		if (this.gas.getGas() - 0.02 * Math.pow(this.speed + totalAceleration * (time), 2) > 0) {
+		if (this.gasTank.getGas() - 0.02 * Math.pow(this.speed + totalAceleration * (time), 2) > 0) {
 			// if with the new acceleration the gas will be greater than 0
 			if (speed <= this.getMaxAceleration())
 				updatePropllersTo(speed);
 			else
 				throw new Exception("Acceleration is higher than max acceleration!");
 		} else {
-			updatePropellersMultiplier(0.0);
+			updatePropellantsMultiplier(0.0);
 		}
-		if (this.gas.getGas() > 0) {
+		if (this.gasTank.getGas() > 0) {
 			System.out.println(this.name + ":  Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration
-					+ "  ||  Gas= " + this.gas.getGas());
+					+ "  ||  Gas= " + this.gasTank.getGas());
 			update(time);
 		}
 	}
 
-	private void updatePropellersMultiplier(double multiplier) {
-		for (Propeller p : propellers)
+	private void updatePropellantsMultiplier(double multiplier) {
+		for (Propellant p : propellants)
 			p.setActualAcceleration(p.getMaxAcceleration() * multiplier);
 	}
 
 	private void updatePropllersTo(double speed) {
 		double remaining = speed;
-		for (Propeller p : propellers) {
+		for (Propellant p : propellants) {
 			if (remaining > 0) {
 				if (remaining > p.getMaxAcceleration()) {
 					p.setActualAcceleration(p.getActualAcceleration());
