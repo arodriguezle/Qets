@@ -12,11 +12,11 @@ public class Track {
 
 	public Track(String name, double distance, int maxSeconds) throws Exception {
 		this.name = name;
-		if (distance > 0)
+		if (distance >= 0)
 			this.distance = distance;
 		else
 			throw new Exception("Distance is lower than 0!");
-		if (maxSeconds < 0)
+		if (maxSeconds >= 0)
 			this.maxSeconds = maxSeconds;
 		else
 			throw new Exception("Max Seconds is lower than 0!");
