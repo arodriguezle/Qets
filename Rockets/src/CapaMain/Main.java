@@ -1,4 +1,5 @@
 package CapaMain;
+import CapaAplication.*;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
