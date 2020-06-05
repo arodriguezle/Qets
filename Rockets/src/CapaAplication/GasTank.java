@@ -28,6 +28,7 @@ public class GasTank {
 	}
 
 	public void setGas(double gas) {
-		this.gas = gas;
+		if (gas <= this.tankCapacity)
+			this.gas = gas;
 	}
 }
