@@ -39,8 +39,9 @@ public class Track {
 						System.out.println(rocket.getName() + ": HAS NO GAS at " + rocket.getDistance());
 					}
 					if (algorithm == 1) {
-						rocket.determinedAccelerationAlgorihtm((int) track.getSeconds(), 9.0);
-						// 9.18 is the acceleration that we tested that works
+						rocket.determinedAccelerationAlgorihtm((int) track.getSeconds(), 3);
+						System.out.println(rocket.toString());
+						// 3 (9m/s^2) is the acceleration that we tested that works
 					} else if (algorithm == 2) {
 						throw new Exception("Not implemented yet, work in progress for the next delivery");
 					}

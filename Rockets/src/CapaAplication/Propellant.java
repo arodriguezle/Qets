@@ -24,6 +24,6 @@ public class Propellant {
 		else if (newAcceleration <= maxAceleration)
 			this.actualAceleration = newAcceleration;
 		else
-			throw new Exception("New Acceleration is higher than Max Acceleration!");
+			this.actualAceleration = this.maxAceleration;
 	}
 }

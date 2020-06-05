@@ -93,30 +93,39 @@ public class Rocket {
 	public double getMaxAceleration() {
 		double maxAcc = 0;
 		for (Propellant p : propellants)
-			maxAcc += p.getMaxAcceleration();
+			if (p.getMaxAcceleration() > maxAcc)
+				maxAcc = p.getMaxAcceleration();
 		return maxAcc;
 	}
 
-	public void determinedAccelerationAlgorihtm(int time, double speed) throws Exception {
+	public void determinedAccelerationAlgorihtm(int time, int acceleration) throws Exception {
 		if (this.gasTank.getGas() - 0.02 * Math.pow(this.speed + totalAceleration * (time), 2) > 0) {
 			// if with the new acceleration the gas will be greater than 0
-			if (speed <= this.getMaxAceleration())
-				updatePropllersTo(speed);
+			if (acceleration <= this.getMaxAceleration())
+				updatePropllersTo(acceleration);
 			else
 				throw new Exception("Acceleration is higher than max acceleration!");
 		} else {
-			updatePropellantsMultiplier(0.0);
+			stopPropellants(0.0);
 		}
 		if (this.gasTank.getGas() > 0) {
-			System.out.println(this.name + ":  Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration
-					+ "  ||  Gas= " + this.gasTank.getGas());
 			update(time);
 		}
 	}
 
-	private void updatePropellantsAccelerationTo(int acceleration) throws Exception {
+	public String toString() {
+		return this.name + ":  Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration + "  ||  Gas= "
+				+ this.gasTank.getGas();
+	}
+
+	private void stopPropellants(double multiplier) throws Exception {
+		for (Propellant p : propellants)
+			p.setActualAcceleration(0);
+	}
+
+	private void updatePropllersTo(int newAcceleration) throws Exception {
 		for (Propellant p : propellants) {
-			p.setActualAcceleration(acceleration);
+			p.setActualAcceleration(newAcceleration);
 		}
 	}
 }
