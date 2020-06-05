@@ -91,7 +91,7 @@ public class Rocket {
 	}
 
 	public double getMaxAceleration() {
-		double maxAcc = 0;
+		int maxAcc = 0;
 		for (Propellant p : propellants)
 			if (p.getMaxAcceleration() > maxAcc)
 				maxAcc = p.getMaxAcceleration();
@@ -104,7 +104,8 @@ public class Rocket {
 			if (acceleration <= this.getMaxAceleration())
 				updatePropllersTo(acceleration);
 			else
-				throw new Exception("Acceleration is higher than max acceleration!");
+				throw new Exception("Acceleration is higher than max acceleration! (" + acceleration + ">"
+						+ this.getMaxAceleration() + ")");
 		} else {
 			stopPropellants(0.0);
 		}
