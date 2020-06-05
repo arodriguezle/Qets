@@ -114,25 +114,9 @@ public class Rocket {
 		}
 	}
 
-	private void updatePropellantsMultiplier(double multiplier) throws Exception {
-		for (Propellant p : propellants)
-			p.setActualAcceleration(p.getMaxAcceleration() * multiplier);
-	}
-
-	private void updatePropllersTo(double speed) throws Exception {
-		double remaining = speed;
+	private void updatePropellantsAccelerationTo(int acceleration) throws Exception {
 		for (Propellant p : propellants) {
-			if (remaining > 0) {
-				if (remaining > p.getMaxAcceleration()) {
-					p.setActualAcceleration(p.getActualAcceleration());
-					remaining = remaining - p.getMaxAcceleration();
-				} else {
-					p.setActualAcceleration(remaining);
-					remaining = 0;
-				}
-			} else {
-				p.setActualAcceleration(0.0);
-			}
+			p.setActualAcceleration(acceleration);
 		}
 	}
 }
