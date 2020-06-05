@@ -1,3 +1,4 @@
+package CapaAplication;
 public class Propeller {
 
 	private double maxAceleration;

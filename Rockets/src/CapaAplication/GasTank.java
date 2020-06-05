@@ -1,3 +1,4 @@
+package CapaAplication;
 
 public class GasTank {
 	private double gas;
