@@ -8,11 +8,17 @@ public class Track {
 	private int maxSeconds;
 	private List<Rocket> rockets;
 
-	public Track(String name, double distance, int maxSeconds) {
+	public Track(String name, double distance, int maxSeconds) throws Exception {
 		this.name = name;
-		this.distance = distance;
+		if (distance > 0)
+			this.distance = distance;
+		else
+			throw new Exception("Distance is lower than 0!");
+		if (maxSeconds < 0)
+			this.maxSeconds = maxSeconds;
+		else
+			throw new Exception("Max Seconds is lower than 0!");
 		this.seconds = 0;
-		this.maxSeconds = maxSeconds;
 		this.rockets = new ArrayList<Rocket>();
 	}
 
@@ -32,12 +38,19 @@ public class Track {
 		return this.maxSeconds;
 	}
 
-	public void setSeconds(int seconds) {
-		this.seconds = seconds;
+	public void setSeconds(int seconds) throws Exception {
+		if (seconds < 0)
+			this.seconds = seconds;
+		else
+			throw new Exception("Seconds is lower than 0!");
 	}
 
-	public void addRocket(Rocket rocket) {
-		this.rockets.add(rocket);
+	public void addRocket(Rocket rocket) throws Exception {
+		if (rocket != null)
+			this.rockets.add(rocket);
+		else
+			throw new Exception("Rocket to add on track " + this.name + " is null!");
+
 	}
 
 	public void updateRockets() {

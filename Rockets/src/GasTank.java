@@ -3,9 +3,12 @@ public class GasTank {
 	private double gas;
 	private double tankCapacity;
 
-	public GasTank(double tank) {
-		gas = tank;
-		tankCapacity = tank;
+	public GasTank(double tank) throws Exception {
+		if (tank > 0) {
+			gas = tank;
+			tankCapacity = tank;
+		} else
+			throw new Exception("Tank capacity is lower than 0!");
 	}
 
 	public double getGas() {
