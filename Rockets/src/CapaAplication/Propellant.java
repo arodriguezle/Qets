@@ -2,24 +2,26 @@ package CapaAplication;
 
 public class Propellant {
 
-	private double maxAceleration;
-	private double actualAceleration;
+	private int maxAceleration;
+	private int actualAceleration;
 
-	public Propellant(double maxAcceleration) {
+	public Propellant(int maxAcceleration) {
 		this.maxAceleration = maxAcceleration;
-		this.actualAceleration = maxAcceleration;
+		this.actualAceleration = 0;
 	}
 
-	public double getMaxAcceleration() {
+	public int getMaxAcceleration() {
 		return this.maxAceleration;
 	}
 
-	public double getActualAcceleration() {
+	public int getActualAcceleration() {
 		return this.actualAceleration;
 	}
 
-	public void setActualAcceleration(double newAcceleration) throws Exception {
-		if (newAcceleration <= maxAceleration)
+	public void setActualAcceleration(int newAcceleration) throws Exception {
+		if (newAcceleration < 0)
+			throw new Exception("New Acceleration is lower than 0!");
+		else if (newAcceleration <= maxAceleration)
 			this.actualAceleration = newAcceleration;
 		else
 			throw new Exception("New Acceleration is higher than Max Acceleration!");
