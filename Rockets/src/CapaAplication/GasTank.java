@@ -1,34 +1,38 @@
 package CapaAplication;
 
 public class GasTank {
-	private double gas;
-	private double tankCapacity;
+	private double currentGas;
+	private double maxTankCapacity;
 
 	public GasTank(double tank) throws Exception {
 		if (tank >= 0) {
-			gas = tank;
-			tankCapacity = tank;
+			currentGas = tank;
+			maxTankCapacity = tank;
 		} else
 			throw new Exception("Tank capacity is lower than 0!");
 	}
 
 	public double getGas() {
-		return this.gas;
+		return this.currentGas;
 	}
 
 	public double getTankCapacity() {
-		return this.tankCapacity;
+		return this.maxTankCapacity;
 	}
 
 	public void updateGas(double speed) throws Exception {
 		if (speed >= 0)
-			this.gas -= 0.02 * Math.pow(speed, 2);
+			this.currentGas -= 0.02 * Math.pow(speed, 2);
 		else
 			throw new Exception("Rockets can't go backwards!");
 	}
 
 	public void setGas(double gas) {
-		if (gas <= this.tankCapacity)
-			this.gas = gas;
+		if (gas <= this.maxTankCapacity) {
+			if(gas < 0) {
+				this.currentGas = 0;
+			}
+			this.currentGas = gas;
+		}
 	}
 }
