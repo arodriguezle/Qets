@@ -43,7 +43,12 @@ public class Track {
 						System.out.println(rocket.toString());
 						// 3 (9m/s^2) is the acceleration that we tested that works
 					} else if (algorithm == 2) {
-						throw new Exception("Not implemented yet, work in progress for the next delivery");
+						Backtracking b = new Backtracking(this.rockets.get(0), this);
+						// throw new Exception("Not implemented yet, work in progress for the next
+						// delivery");
+						b.doBacktracking();
+						System.out.println(b.millorSol.toString());
+						someoneLeft = false;
 					}
 				} else {
 					System.out.println(rocket.getName() + ": FINISHED at " + rocket.getDistance() + " with "
@@ -87,10 +92,7 @@ public class Track {
 
 	}
 
-	public void updateRockets() {
-		for (Rocket r : this.rockets)
-			r.update(this.seconds);
-	}
+
 
 	public List<Rocket> getRockets() {
 		return this.rockets;

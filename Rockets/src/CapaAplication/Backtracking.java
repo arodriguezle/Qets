@@ -31,7 +31,7 @@ public class Backtracking {
 		}
 	}
 
-	private boolean esSolucio() {
+	private boolean esSolucio() throws Exception {
 		if (Qet.getGas() > 0) {
 			if (Qet.getDistance() >= trk.getDistance()) {
 				if (trk.getMaxSeconds() >= trk.getSeconds()) {
@@ -52,7 +52,7 @@ public class Backtracking {
 		return false;
 	}
 
-	private boolean esAcceptable(int i) {
+	private boolean esAcceptable(int i) throws Exception {
 		if (Qet.getGas() > 0) {
 			if (i < Qet.getMaxAceleration() && i >= 0) {
 				return true;
@@ -61,7 +61,7 @@ public class Backtracking {
 		return false;
 	}
 
-	private boolean esCompletable() {
+	private boolean esCompletable() throws Exception {
 		if (Qet.getGas() > 0) {
 			if (Qet.getDistance() < trk.getDistance()) {
 				return true;
@@ -70,13 +70,14 @@ public class Backtracking {
 		return false;
 	}
 
-	public void Backtracking() {
-		for (int t = 0; t <= 18; t++) {
+	public void doBacktracking() throws Exception {// esto es para un cohete, habria k ponerlo k lo haga en una lista,
+													// asi los haria todos a la vez
+		for (int t = 0; t <= this.trk.getMaxSeconds(); t++) {
 			for (int i = 0; i < Qet.getMaxAceleration(); i++) {
 				Integer value = new Integer(i);
 				if (esAcceptable(value)) {
 					sol.acelerations.add(value);
-					Qet.update(t);
+					Qet.update(i, t);
 					if (esSolucio()) {
 						System.out.println("S'ha trobat una solucio");
 						if (esMillor()) {
@@ -85,9 +86,10 @@ public class Backtracking {
 						}
 					} else {
 						if (esCompletable()) {
-							Backtracking();
+							doBacktracking();
 						}
 						sol.acelerations.remove(value);
+						Qet.updateBack(i, t);
 					}
 				}
 			}

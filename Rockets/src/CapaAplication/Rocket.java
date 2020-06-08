@@ -6,9 +6,9 @@ import java.util.List;
 public class Rocket {
 
 	private String name;
-	private double speed;
-	private double distance;
-	private double totalAceleration;
+	private double speed, lastSpeed;
+	private double distance, lastDistance;
+	private double totalAcceleration, lastTotalAcceleration;
 	private List<Propellant> propellants;
 	private GasTank gasTank;
 
@@ -20,7 +20,7 @@ public class Rocket {
 			throw new Exception("Gas Tank is null!");
 		this.speed = 0;
 		this.distance = 0;
-		this.totalAceleration = 0;
+		this.totalAcceleration = 0;
 		this.propellants = new ArrayList<Propellant>();
 	}
 
@@ -29,7 +29,7 @@ public class Rocket {
 		this.gasTank = null;
 		this.speed = 0;
 		this.distance = 0;
-		this.totalAceleration = 0;
+		this.totalAcceleration = 0;
 		this.propellants = new ArrayList<Propellant>();
 	}
 
@@ -56,8 +56,8 @@ public class Rocket {
 		return this.distance;
 	}
 
-	public double getTotalAceleration() {
-		return this.totalAceleration;
+	public double getTotalAcceleration() {
+		return this.totalAcceleration;
 	}
 
 	public void addPropellants(Propellant... propellants) {
@@ -66,28 +66,41 @@ public class Rocket {
 	}
 
 	public void updateSpeed(int time) {
-		this.speed = speed + totalAceleration * 1;
+		this.speed = speed + totalAcceleration * 1;
 	}
 
-	public void updateTotalAceleration() {
-		this.totalAceleration = 0;
+	public void updatetotalAcceleration() {
+		this.totalAcceleration = 0;
 		for (Propellant p : propellants)
-			this.totalAceleration += p.getActualAcceleration();
+			this.totalAcceleration += p.getActualAcceleration();
 	}
 
 	public void updateDistance(int time) {
-		this.distance = distance + speed + (1 / 2 * totalAceleration) * Math.pow(time, 2);
+		this.distance = distance + speed + (1 / 2 * totalAcceleration) * Math.pow(time, 2);
 	}
 
 	public void updateGas() {
 		this.gasTank.setGas(this.gasTank.getGas() - 0.02 * Math.pow(speed, 2));
 	}
 
-	public void update(int time) {
-		updateTotalAceleration();
+	public void update(int time, int acceleration) throws Exception {
+		if (acceleration <= this.getMaxAceleration())
+			uptdatePropellantsTo(acceleration);
+		else
+			throw new Exception("Acceleration is higher than max acceleration! (" + acceleration + ">"
+					+ this.getMaxAceleration() + ")");
+		uptdatePropellantsTo(acceleration);
+		updatetotalAcceleration();
 		updateSpeed(time);
 		updateDistance(time);
 		updateGas();
+	}
+
+	public void updateBack(int time, int acceleration/* esto creo k sobra */) {
+		/*
+		 * esto actualiza los valores a los k nuevos lastAtributo quiza con esto
+		 * funciona
+		 */
 	}
 
 	public double getMaxAceleration() {
@@ -99,32 +112,27 @@ public class Rocket {
 	}
 
 	public void determinedAccelerationAlgorihtm(int time, int acceleration) throws Exception {
-		if (this.gasTank.getGas() - 0.02 * Math.pow(this.speed + totalAceleration * (time), 2) > 0) {
+		if (this.gasTank.getGas() - 0.02 * Math.pow(this.speed + totalAcceleration * (time), 2) > 0) {
 			// if with the new acceleration the gas will be greater than 0
-			if (acceleration <= this.getMaxAceleration())
-				updatePropllersTo(acceleration);
-			else
-				throw new Exception("Acceleration is higher than max acceleration! (" + acceleration + ">"
-						+ this.getMaxAceleration() + ")");
+			if (this.gasTank.getGas() > 0) {
+				update(time, acceleration);
+			}
 		} else {
 			stopPropellants(0.0);
-		}
-		if (this.gasTank.getGas() > 0) {
-			update(time);
 		}
 	}
 
 	public String toString() {
-		return this.name + ":  Distance = " + this.distance + "  ||  Acc= " + this.totalAceleration + "  ||  Gas= "
+		return this.name + ":  Distance = " + this.distance + "  ||  Acc= " + this.totalAcceleration + "  ||  Gas= "
 				+ this.gasTank.getGas();
 	}
 
-	private void stopPropellants(double multiplier) throws Exception {
+	public void stopPropellants(double multiplier) throws Exception {
 		for (Propellant p : propellants)
 			p.setActualAcceleration(0);
 	}
 
-	private void updatePropllersTo(int newAcceleration) throws Exception {
+	public void uptdatePropellantsTo(int newAcceleration) throws Exception {
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(newAcceleration);
 		}
