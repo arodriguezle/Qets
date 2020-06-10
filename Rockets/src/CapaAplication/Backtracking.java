@@ -6,20 +6,20 @@ public class Backtracking {
 
 	Rocket Qet;
 	Track trk;
-	Solucio sol, millorSol = null;
+	Solution sol, millorSol = null;
 
 	public Backtracking(Rocket x, Track y) {
-		sol = new Solucio();
+		sol = new Solution();
 		Qet = x;
 		trk = y;
 	}
 
-	public class Solucio {
+	public class Solution {
 		ArrayList<Integer> acelerationRegister;
 		ArrayList<Integer> distanceRegister;
 		ArrayList<Integer> gasRegister;
 
-		public Solucio() {
+		public Solution() {
 			
 			acelerationRegister = new ArrayList<Integer>();
 			distanceRegister = new ArrayList<Integer>();
