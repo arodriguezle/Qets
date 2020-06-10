@@ -20,6 +20,7 @@ public class Backtracking {
 		ArrayList<Integer> gasRegister;
 
 		public Solucio() {
+			
 			acelerationRegister = new ArrayList<Integer>();
 			distanceRegister = new ArrayList<Integer>();
 			gasRegister = new ArrayList<Integer>();
@@ -28,14 +29,8 @@ public class Backtracking {
 		public String toString() {
 			int t = 0;
 			String s = "";
-			try {
-				for (double d : acelerationRegister) {
-					s = s + "Second: " + t + " --> Acceleration: " + d + " || Distance: " + Qet.getDistance()
-							+ " || Gas: " + Qet.getGas() + "\n";
-					t++;
-				}
-			} catch (Exception e) {
-				System.out.println(e.getStackTrace());
+			for (double d : acelerationRegister) {
+				s = s + "Second: " + t + " --> Acceleration: " + d + "\n";
 			}
 			return "";
 		}
@@ -58,6 +53,13 @@ public class Backtracking {
 		}
 		if (millorSol.acelerationRegister.size() > sol.acelerationRegister.size()) {
 			return true;
+		}
+		else {
+			if (millorSol.acelerationRegister.size() == sol.acelerationRegister.size()) {
+				if (millorSol.gasRegister.get(millorSol.gasRegister.size()) < sol.gasRegister.get(sol.gasRegister.size())) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}
