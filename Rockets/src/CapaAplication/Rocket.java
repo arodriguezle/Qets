@@ -98,7 +98,7 @@ public class Rocket {
 		updateGas();
 	}
 
-	public void updateBack(Solucio solution, int time) {
+	public void updateBack(Solution solution, int time) {
 		this.totalAcceleration = solution.acelerationRegister.get(time);
 		this.distance = solution.distanceRegister.get(time);
 		this.gasTank.setGas(solution.gasRegister.get(time));
