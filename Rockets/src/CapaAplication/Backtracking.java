@@ -91,7 +91,7 @@ public class Backtracking {
 	public void doBacktracking() throws Exception {// esto es para un cohete, habria k ponerlo k lo haga en una lista,
 													// asi los haria todos a la vez
 		for (int t = 0; t <= this.trk.getMaxSeconds(); t++) {
-			for (int i = 0; i < Qet.getMaxAceleration(); i++) {
+			for (int i = (int)Qet.getMaxAceleration(); i >= 0; i--) {
 				if (esAcceptable(i)) {
 					Integer valueAcceleration = new Integer(i);
 					sol.acelerationRegister.add(valueAcceleration);
