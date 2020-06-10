@@ -83,6 +83,7 @@ public class Backtracking {
 						if (esMillor()) {
 							millorSol = sol;
 							System.out.println(millorSol.toString());
+							Qet.updateBack(i, t);
 						}
 					} else {
 						if (esCompletable()) {
