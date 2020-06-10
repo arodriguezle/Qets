@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CapaAplication.Backtracking.Solucio;
+import CapaAplication.Backtracking.Solution;
 
 public class Rocket {
 
