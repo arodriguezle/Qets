@@ -16,14 +16,14 @@ public class Backtracking {
 
 	public class Solution {
 		ArrayList<Integer> acelerationRegister;
-		ArrayList<Integer> distanceRegister;
-		ArrayList<Integer> gasRegister;
+		ArrayList<Double> distanceRegister;
+		ArrayList<Double> gasRegister;
 
 		public Solution() {
 			
 			acelerationRegister = new ArrayList<Integer>();
-			distanceRegister = new ArrayList<Integer>();
-			gasRegister = new ArrayList<Integer>();
+			distanceRegister = new ArrayList<Double>();
+			gasRegister = new ArrayList<Double>();
 		}
 
 		public String toString() {
@@ -92,9 +92,13 @@ public class Backtracking {
 													// asi los haria todos a la vez
 		for (int t = 0; t <= this.trk.getMaxSeconds(); t++) {
 			for (int i = 0; i < Qet.getMaxAceleration(); i++) {
-				Integer value = new Integer(i);
-				if (esAcceptable(value)) {
-					sol.acelerationRegister.add(value);
+				if (esAcceptable(i)) {
+					Integer valueAcceleration = new Integer(i);
+					sol.acelerationRegister.add(valueAcceleration);
+					Double valueGas = new Double(Qet.getGas());
+					sol.gasRegister.add(valueGas);
+					Double valueDistance = new Double(Qet.getDistance());
+					sol.distanceRegister.add(valueDistance);
 					Qet.update(i, t);
 					if (esSolucio()) {
 						System.out.println("S'ha trobat una solucio");
@@ -107,7 +111,9 @@ public class Backtracking {
 						if (esCompletable()) {
 							doBacktracking();
 						}
-						sol.acelerationRegister.remove(value);
+						sol.acelerationRegister.remove(valueAcceleration);
+						sol.gasRegister.remove(valueGas);
+						sol.distanceRegister.remove(valueDistance);
 						Qet.updateBack(sol, t-1);
 					}
 				}
