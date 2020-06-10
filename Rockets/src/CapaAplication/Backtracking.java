@@ -3,7 +3,8 @@ package CapaAplication;
 import java.util.ArrayList;
 
 public class Backtracking {
-
+	
+	int contSolutions = 0;
 	Rocket Qet;
 	Track trk;
 	Solution sol, millorSol = null;
@@ -90,31 +91,30 @@ public class Backtracking {
 
 	public void doBacktracking() throws Exception {// esto es para un cohete, habria k ponerlo k lo haga en una lista,
 													// asi los haria todos a la vez
-		for (int t = 0; t <= this.trk.getMaxSeconds(); t++) {
-			for (int i = (int)Qet.getMaxAceleration(); i >= 0; i--) {
-				if (esAcceptable(i)) {
-					Integer valueAcceleration = new Integer(i);
-					sol.acelerationRegister.add(valueAcceleration);
-					Double valueGas = new Double(Qet.getGas());
-					sol.gasRegister.add(valueGas);
-					Double valueDistance = new Double(Qet.getDistance());
-					sol.distanceRegister.add(valueDistance);
-					Qet.update(i, t);
-					if (esSolucio()) {
-						System.out.println("S'ha trobat una solucio");
-						if (esMillor()) {
-							millorSol = sol;
-							System.out.println(millorSol.toString());
-							Qet.updateBack(sol, t-1);
+		if (contSolutions == 0) {
+			for (int t = 0; t <= this.trk.getMaxSeconds(); t++) {
+				for (int i = (int)Qet.getMaxAceleration(); i >= 0; i--) {
+					if (esAcceptable(i)) {
+						Integer valueAcceleration = new Integer(i);
+						sol.acelerationRegister.add(valueAcceleration);
+						Double valueGas = new Double(Qet.getGas());
+						sol.gasRegister.add(valueGas);
+						Double valueDistance = new Double(Qet.getDistance());
+						sol.distanceRegister.add(valueDistance);
+						Qet.update(t, i);
+						if (esSolucio()) {
+							System.out.println("S'ha trobat una solucio");
+							contSolutions = 1;
+							}
+						} else {
+							if (esCompletable()) {
+								doBacktracking();
+							}
+							sol.acelerationRegister.remove(valueAcceleration);
+							sol.gasRegister.remove(valueGas);
+							sol.distanceRegister.remove(valueDistance);
+							Qet.updateBack(sol, t- 1);
 						}
-					} else {
-						if (esCompletable()) {
-							doBacktracking();
-						}
-						sol.acelerationRegister.remove(valueAcceleration);
-						sol.gasRegister.remove(valueGas);
-						sol.distanceRegister.remove(valueDistance);
-						Qet.updateBack(sol, t- 1);
 					}
 				}
 			}
