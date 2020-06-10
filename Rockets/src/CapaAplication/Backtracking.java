@@ -105,7 +105,6 @@ public class Backtracking {
 						if (esSolucio()) {
 							System.out.println("S'ha trobat una solucio");
 							contSolutions = 1;
-							}
 						} else {
 							if (esCompletable()) {
 								doBacktracking();
