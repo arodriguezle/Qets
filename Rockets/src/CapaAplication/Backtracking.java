@@ -114,7 +114,7 @@ public class Backtracking {
 						sol.acelerationRegister.remove(valueAcceleration);
 						sol.gasRegister.remove(valueGas);
 						sol.distanceRegister.remove(valueDistance);
-						Qet.updateBack(sol, t-1);
+						Qet.updateBack(sol, t- 1);
 					}
 				}
 			}
