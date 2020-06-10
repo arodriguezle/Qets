@@ -101,14 +101,14 @@ public class Backtracking {
 						if (esMillor()) {
 							millorSol = sol;
 							System.out.println(millorSol.toString());
-							Qet.updateBack(i, t);
+							Qet.updateBack();
 						}
 					} else {
 						if (esCompletable()) {
 							doBacktracking();
 						}
 						sol.acelerationRegister.remove(value);
-						Qet.updateBack(i, t);
+						Qet.updateBack();
 					}
 				}
 			}
