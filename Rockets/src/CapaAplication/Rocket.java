@@ -3,12 +3,14 @@ package CapaAplication;
 import java.util.ArrayList;
 import java.util.List;
 
+import CapaAplication.Backtracking.Solucio;
+
 public class Rocket {
 
 	private String name;
-	private double speed, lastSpeed;
-	private double distance, lastDistance;
-	private double totalAcceleration, lastTotalAcceleration;
+	private double speed;
+	private double distance;
+	private double totalAcceleration;
 	private List<Propellant> propellants;
 	private GasTank gasTank;
 
@@ -96,11 +98,10 @@ public class Rocket {
 		updateGas();
 	}
 
-	public void updateBack(int time, int acceleration/* esto creo k sobra */) {
-		/*
-		 * esto actualiza los valores a los k nuevos lastAtributo quiza con esto
-		 * funciona
-		 */
+	public void updateBack(Solution solution, int time) {
+		this.totalAcceleration = solution.acelerationRegister.get(time);
+		this.distance = solution.distanceRegister.get(time);
+		this.gasTank.setGas(solution.gasRegister.get(time));
 	}
 
 	public double getMaxAceleration() {

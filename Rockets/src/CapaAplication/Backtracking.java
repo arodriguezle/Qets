@@ -29,8 +29,14 @@ public class Backtracking {
 		public String toString() {
 			int t = 0;
 			String s = "";
-			for (double d : acelerationRegister) {
-				s = s + "Second: " + t + " --> Acceleration: " + d + "\n";
+			try {
+				for (double d : acelerationRegister) {
+					s = s + "Second: " + t + " --> Acceleration: " + d + " || Distance: " + Qet.getDistance()
+							+ " || Gas: " + Qet.getGas() + "\n";
+					t++;
+				}
+			} catch (Exception e) {
+				System.out.println(e.getStackTrace());
 			}
 			return "";
 		}
