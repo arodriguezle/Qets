@@ -47,7 +47,6 @@ public class Track {
 						// throw new Exception("Not implemented yet, work in progress for the next
 						// delivery");
 						b.doBacktracking();
-						System.out.println(b.millorSol.toString());
 						someoneLeft = false;
 					}
 				} else {

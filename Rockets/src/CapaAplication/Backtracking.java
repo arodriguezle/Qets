@@ -3,7 +3,7 @@ package CapaAplication;
 import java.util.ArrayList;
 
 public class Backtracking {
-	
+
 	int contSolutions = 0;
 	Rocket Qet;
 	Track trk;
@@ -21,7 +21,7 @@ public class Backtracking {
 		ArrayList<Double> gasRegister;
 
 		public Solution() {
-			
+
 			acelerationRegister = new ArrayList<Integer>();
 			distanceRegister = new ArrayList<Double>();
 			gasRegister = new ArrayList<Double>();
@@ -60,10 +60,10 @@ public class Backtracking {
 		}
 		if (millorSol.acelerationRegister.size() > sol.acelerationRegister.size()) {
 			return true;
-		}
-		else {
+		} else {
 			if (millorSol.acelerationRegister.size() == sol.acelerationRegister.size()) {
-				if (millorSol.gasRegister.get(millorSol.gasRegister.size()) < sol.gasRegister.get(sol.gasRegister.size())) {
+				if (millorSol.gasRegister.get(millorSol.gasRegister.size()) < sol.gasRegister
+						.get(sol.gasRegister.size())) {
 					return true;
 				}
 			}
@@ -89,11 +89,10 @@ public class Backtracking {
 		return false;
 	}
 
-	public void doBacktracking() throws Exception {// esto es para un cohete, habria k ponerlo k lo haga en una lista,
-													// asi los haria todos a la vez
+	public void doBacktracking(int time) throws Exception {
 		if (contSolutions == 0) {
-			for (int t = 0; t <= this.trk.getMaxSeconds(); t++) {
-				for (int i = (int)Qet.getMaxAceleration(); i >= 0; i--) {
+			for (int t = time; t <= this.trk.getMaxSeconds(); t++) {
+				for (int i = (int) Qet.getMaxAceleration(); i >= 0; i--) {
 					if (esAcceptable(i)) {
 						Integer valueAcceleration = new Integer(i);
 						sol.acelerationRegister.add(valueAcceleration);
@@ -101,18 +100,19 @@ public class Backtracking {
 						sol.gasRegister.add(valueGas);
 						Double valueDistance = new Double(Qet.getDistance());
 						sol.distanceRegister.add(valueDistance);
+						System.out.println(Qet.toString());
 						Qet.update(t, i);
 						if (esSolucio()) {
-							System.out.println("S'ha trobat una solucio");
+							System.out.println("S'ha trobat una solucio!!!");
 							contSolutions = 1;
 						} else {
 							if (esCompletable()) {
-								doBacktracking();
+								doBacktracking(time + 1);
 							}
+							Qet.updateBack(sol, t-1);
 							sol.acelerationRegister.remove(valueAcceleration);
 							sol.gasRegister.remove(valueGas);
 							sol.distanceRegister.remove(valueDistance);
-							Qet.updateBack(sol, t- 1);
 						}
 					}
 				}
