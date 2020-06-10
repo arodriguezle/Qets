@@ -15,16 +15,21 @@ public class Backtracking {
 	}
 
 	public class Solucio {
-		ArrayList<Integer> acelerations;
+		ArrayList<Integer> acelerationRegister;
+		ArrayList<Integer> distanceRegister;
+		ArrayList<Integer> gasRegister;
 
 		public Solucio() {
-			acelerations = new ArrayList<Integer>();
+			
+			acelerationRegister = new ArrayList<Integer>();
+			distanceRegister = new ArrayList<Integer>();
+			gasRegister = new ArrayList<Integer>();
 		}
 
 		public String toString() {
 			int t = 0;
 			String s = "";
-			for (double d : acelerations) {
+			for (double d : acelerationRegister) {
 				s = s + "Second: " + t + " --> Acceleration: " + d + "\n";
 			}
 			return "";
@@ -46,7 +51,7 @@ public class Backtracking {
 		if (millorSol == null) {
 			return true;
 		}
-		if (millorSol.acelerations.size() > sol.acelerations.size()) {
+		if (millorSol.acelerationRegister.size() > sol.acelerationRegister.size()) {
 			return true;
 		}
 		return false;
@@ -76,7 +81,7 @@ public class Backtracking {
 			for (int i = 0; i < Qet.getMaxAceleration(); i++) {
 				Integer value = new Integer(i);
 				if (esAcceptable(value)) {
-					sol.acelerations.add(value);
+					sol.acelerationRegister.add(value);
 					Qet.update(i, t);
 					if (esSolucio()) {
 						System.out.println("S'ha trobat una solucio");
@@ -89,7 +94,7 @@ public class Backtracking {
 						if (esCompletable()) {
 							doBacktracking();
 						}
-						sol.acelerations.remove(value);
+						sol.acelerationRegister.remove(value);
 						Qet.updateBack(i, t);
 					}
 				}
