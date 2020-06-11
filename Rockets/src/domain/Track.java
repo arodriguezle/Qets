@@ -28,10 +28,10 @@ public class Track {
 	}
 
 	public void startRace(Track track, int algorithm) throws Exception {
-		System.out.println("---LOADING  TRACKS--- ");
-		DataFileLoader dfl = new DataFileLoader();
-		dfl.loadRockets();
-		dfl.loadTracks();
+		System.out.println("---LOADING  POSSIBLE TRACKS--- ");
+		// aqui factoria de circuitos
+		System.out.println("---LOADING  ROCKETS--- ");
+		// aqui factoria de cohetes
 		System.out.println("---RACE  STARTED--- ");
 		System.out.println("---");
 		boolean someoneLeft = true;

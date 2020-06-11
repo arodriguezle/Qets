@@ -22,6 +22,13 @@ public class DataFileLoader {// lector d'arxius persistens per carregar circuits
 		tracksData = new File(tracksFileName);
 	}
 
+	public List<Track> getTracks() throws Exception {
+		if (this.tracks.isEmpty() == false)
+			return this.tracks;
+		else
+			throw new Exception("No hi ha circuits carregats!!!");
+	}
+
 	public List<Rocket> getRockets() throws Exception {
 		if (this.rockets.isEmpty() == false)
 			return this.rockets;
@@ -29,7 +36,7 @@ public class DataFileLoader {// lector d'arxius persistens per carregar circuits
 			throw new Exception("No hi ha cohets carregats!!!");
 	}
 
-	public void loadRockets() throws Exception {// legir cohets
+	public void loadRockets() throws Exception {// llegir cohets
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(rocketsData), "UTF-8"));
 		String st;
 		int lineCounter = 1;
@@ -57,7 +64,11 @@ public class DataFileLoader {// lector d'arxius persistens per carregar circuits
 				lineCounter = 0;
 			}
 			lineCounter++;
-			this.rockets.add(dummy);
+			if (dummy != null) {
+				this.rockets.add(dummy);
+				dummy = null;
+			}
+
 		}
 		br.close();
 	}
@@ -79,7 +90,10 @@ public class DataFileLoader {// lector d'arxius persistens per carregar circuits
 				lineCounter = 0;
 			}
 			lineCounter++;
-			this.tracks.add(dummy);
+			if (dummy != null) {
+				this.tracks.add(dummy);
+				dummy = null;
+			}
 		}
 		br.close();
 	}
