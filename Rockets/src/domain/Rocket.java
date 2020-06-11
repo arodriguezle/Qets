@@ -81,7 +81,7 @@ public class Rocket {
 		this.distance = distance + speed + (1 / 2 * totalAcceleration) * Math.pow(time, 2);
 	}
 
-	public void updateGas() {
+	public void updateGas() throws Exception {
 		this.gasTank.setGas(this.gasTank.getGas() - 0.02 * Math.pow(speed, 2));
 	}
 
@@ -91,14 +91,13 @@ public class Rocket {
 		else
 			throw new Exception("Acceleration is higher than max acceleration! (" + acceleration + ">"
 					+ this.getMaxAceleration() + ")");
-		uptdatePropellantsTo(acceleration);
 		updatetotalAcceleration();
 		updateSpeed(time);
 		updateDistance(time);
 		updateGas();
 	}
 
-	public void updateBack(Solution solution, int time) {
+	public void updateBack(Solution solution, int time) throws Exception {
 		this.totalAcceleration = solution.acelerationRegister.get(time);
 		this.distance = solution.distanceRegister.get(time);
 		this.gasTank.setGas(solution.gasRegister.get(time));
@@ -112,23 +111,12 @@ public class Rocket {
 		return maxAcc;
 	}
 
-	public void determinedAcceleration(int time, int acceleration) throws Exception {
-		if (this.gasTank.getGas() - 0.02 * Math.pow(this.speed + totalAcceleration * (time), 2) > 0) {
-			// if with the new acceleration the gas will be greater than 0
-			if (this.gasTank.getGas() > 0) {
-				update(time, acceleration);
-			}
-		} else {
-			stopPropellants(0.0);
-		}
-	}
-
 	public String toString() {
 		return this.name + ":  Distance = " + this.distance + "  ||  Acc= " + this.totalAcceleration + "  ||  Gas= "
 				+ this.gasTank.getGas();
 	}
 
-	public void stopPropellants(double multiplier) throws Exception {
+	public void stopPropellants() throws Exception {
 		for (Propellant p : propellants)
 			p.setActualAcceleration(0);
 	}
@@ -137,5 +125,13 @@ public class Rocket {
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(newAcceleration);
 		}
+	}
+
+	public void reset() throws Exception {
+		this.gasTank.setGas(this.gasTank.getTankCapacity());
+		this.speed = 0;
+		this.totalAcceleration = 0;
+		this.distance = 0;
+		this.stopPropellants();
 	}
 }

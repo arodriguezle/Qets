@@ -27,12 +27,12 @@ public class GasTank {
 			throw new Exception("Rockets can't go backwards!");
 	}
 
-	public void setGas(double gas) {
+	public void setGas(double gas) throws Exception {
 		if (gas <= this.maxTankCapacity) {
 			if(gas < 0) {
 				this.currentGas = 0;
 			}
 			this.currentGas = gas;
-		}
+		}else throw new Exception("Gas setted is higher than MaxCapacity!");
 	}
 }

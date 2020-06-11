@@ -25,19 +25,35 @@ public class Track {
 		this.rockets = new ArrayList<Rocket>();
 	}
 
+	public String toString() {
+		return "Track " + this.name + ": " + this.distance + "m   ||   " + this.maxSeconds + " seconds";
+	}
+
 	public void startRace() throws Exception {
-
+		inicializeMoves();
 		Algorithms algo = new Algorithms();
-		for (Rocket r : this.rockets) {
-			algo.calcAcceleration(this, r);
-
+		for (Rocket rocket : this.rockets) {
+			algo.calcAcceleration(this, rocket);
 			for (int i = 0; i < algo.getAccelerations().length; i++) {
-				r.determinedAcceleration(i, algo.getAccelerations()[i]);
+				if (algo.getAccelerations()[i] == -1)
+					moves[i] = moves[i] + "\n" + rocket.toString() + " has no gas!";
+				else if (algo.getAccelerations()[i] == -2)
+					moves[i] = moves[i] + "\n" + rocket.toString() + " has finished!";
+				else {
+					rocket.update(i, algo.getAccelerations()[i]);
+					moves[i] = moves[i] + "\n" + rocket.toString();
+				}
 				this.seconds++;
 			}
-			algo.erase();
+			algo.reset();
 			this.seconds = 0;
 		}
+	}
+
+	private void inicializeMoves() {
+		this.moves = new String[this.maxSeconds];
+		for (int i = 0; i < moves.length; i++)
+			moves[i] = "\nSecond " + (i + 1) + ":";
 	}
 
 	public String getName() {
@@ -83,5 +99,18 @@ public class Track {
 
 	public void reset() {
 		this.seconds = 0;
+	}
+
+	public List<String> getResults() throws Exception {
+		List<String> results = new ArrayList<String>();
+		String cad = "";
+		for (Rocket rocket : this.rockets) {
+			rocket.reset();
+			cad = cad + "\n" + rocket.toString();
+		}
+		results.add("\nSecond 0: " + cad);
+		for (int i = 0; i < this.moves.length; i++)
+			results.add(this.moves[i]);
+		return results;
 	}
 }
