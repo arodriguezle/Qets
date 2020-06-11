@@ -1,4 +1,4 @@
-package CapaPersistencia;
+package persistence;
 
 import java.io.BufferedReader;
 import java.io.File;

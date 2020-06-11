@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import CapaPersistencia.DataFileLoader;
+import persistence.DataFileLoader;
 
 public class Track {
 	private String name;
@@ -94,6 +94,16 @@ public class Track {
 			this.rockets.add(rocket);
 		else
 			throw new Exception("Rocket to add on track " + this.name + " is null!");
+
+	}
+
+	public void addRockets(List<Rocket> rockets) throws Exception {
+		for (Rocket rocket : rockets) {
+			if (rocket != null)
+				this.rockets.add(rocket);
+			else
+				throw new Exception("Rocket to add on track " + this.name + " is null!");
+		}
 
 	}
 
