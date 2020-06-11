@@ -28,28 +28,7 @@ public class Track {
 	}
 
 	public void startRace() throws Exception {
-		boolean someoneLeft = true;
-		while (this.getSeconds() <= this.getMaxSeconds() && someoneLeft == true) {
-			TimeUnit.SECONDS.sleep(1);
-			someoneLeft = isSomeoneLeft(this);
-			System.out.println("Second " + (this.getSeconds()) + ":");
-			for (Rocket rocket : this.getRockets()) {
-				if (rocket.getDistance() < this.getDistance()) {
-					if (rocket.getGas() <= 0) {
-						System.out.println(rocket.getName() + ": HAS NO GAS at " + rocket.getDistance());
-					}
-						rocket.determinedAccelerationAlgorihtm((int) this.getSeconds(), 3);
-						System.out.println(rocket.toString());
-						// 3 (9m/s^2) is the acceleration that we tested that works
-					} else {
-					System.out.println(rocket.getName() + ": FINISHED at " + rocket.getDistance() + " with "
-							+ rocket.getGas() + " gas left");
-				}
-			}
-			this.addSecond();
-			System.out.println("---");
-		}
-		System.out.println("---RACE FINISHED--- ");
+		
 	}
 
 	private static boolean isSomeoneLeft(Track track) throws Exception {

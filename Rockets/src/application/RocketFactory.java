@@ -15,4 +15,8 @@ public class RocketFactory {
 		dfl.loadRockets();
 		rockets = dfl.getRockets();
 	}
+	
+	public List<Rocket> getRockets(){
+		return rockets;
+	}
 }
