@@ -46,7 +46,7 @@ public class Track {
 						Backtracking b = new Backtracking(this.rockets.get(0), this);
 						// throw new Exception("Not implemented yet, work in progress for the next
 						// delivery");
-						b.doBacktracking();
+						b.doBacktracking(0);
 						someoneLeft = false;
 					}
 				} else {

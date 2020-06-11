@@ -54,23 +54,6 @@ public class Backtracking {
 		return false;
 	}
 
-	private boolean esMillor() {
-		if (millorSol == null) {
-			return true;
-		}
-		if (millorSol.acelerationRegister.size() > sol.acelerationRegister.size()) {
-			return true;
-		} else {
-			if (millorSol.acelerationRegister.size() == sol.acelerationRegister.size()) {
-				if (millorSol.gasRegister.get(millorSol.gasRegister.size()) < sol.gasRegister
-						.get(sol.gasRegister.size())) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	private boolean esAcceptable(int i) throws Exception {
 		if (Qet.getGas() > 0) {
 			if (i < Qet.getMaxAceleration() && i >= 0) {
@@ -102,6 +85,7 @@ public class Backtracking {
 						sol.distanceRegister.add(valueDistance);
 						System.out.println(Qet.toString());
 						Qet.update(t, i);
+						trk.addSecond();
 						if (esSolucio()) {
 							System.out.println("S'ha trobat una solucio!!!");
 							contSolutions = 1;
@@ -109,7 +93,7 @@ public class Backtracking {
 							if (esCompletable()) {
 								doBacktracking(time + 1);
 							}
-							Qet.updateBack(sol, t-1);
+							Qet.updateBack(sol, t - 1);
 							sol.acelerationRegister.remove(valueAcceleration);
 							sol.gasRegister.remove(valueGas);
 							sol.distanceRegister.remove(valueDistance);
