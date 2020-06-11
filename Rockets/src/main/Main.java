@@ -11,7 +11,14 @@ public class Main {
 		Controller.initiateRockets();
 		System.out.println("---STARTING RACE--- ");
 		Controller.startRace();
-		Controller.showResults();
+		showResults();
 		System.out.println("---RACE FINISHED--- ");
+	}
+
+	public static void showResults() throws Exception {
+		for (String s : Controller.getResults()) {
+			// TimeUnit.SECONDS.sleep(1);
+			System.out.println(s);
+		}
 	}
 }

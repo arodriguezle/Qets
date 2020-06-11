@@ -1,5 +1,7 @@
 package controlator;
 
+import java.util.List;
+
 import application.RocketFactory;
 import application.TrackFactory;
 import domain.*;
@@ -23,10 +25,8 @@ public class Controller {
 		track.addRockets(RF.getRockets());
 	}
 
-	public static void showResults() throws Exception {
-		for (String s : track.getResults()) {
-			// TimeUnit.SECONDS.sleep(1);
-			System.out.println(s);
-		}
+	public static List<String> getResults() throws Exception {
+		return track.getResults();
 	}
+
 }
