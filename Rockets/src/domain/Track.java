@@ -2,9 +2,6 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import persistence.DataFileLoader;
 
 public class Track {
 	private String name;
@@ -12,6 +9,7 @@ public class Track {
 	private int seconds;
 	private int maxSeconds;
 	private List<Rocket> rockets;
+	private String[] moves;
 
 	public Track(String name, double distance, int maxSeconds) throws Exception {
 		this.name = name;
@@ -29,13 +27,17 @@ public class Track {
 
 	public void startRace() throws Exception {
 
-	}
+		Algorithms algo = new Algorithms();
+		for (Rocket r : this.rockets) {
+			algo.calcAcceleration(this, r);
 
-	private static boolean isSomeoneLeft(Track track) throws Exception {
-		for (Rocket rocket : track.getRockets())
-			if (rocket.getGas() > 0 && rocket.getDistance() < track.getDistance())
-				return true;
-		return false;
+			for (int i = 0; i < algo.getAccelerations().length; i++) {
+				r.determinedAcceleration(i, algo.getAccelerations()[i]);
+				this.seconds++;
+			}
+			algo.erase();
+			this.seconds = 0;
+		}
 	}
 
 	public String getName() {
