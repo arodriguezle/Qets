@@ -28,7 +28,17 @@ public class Track {
 	}
 
 	public void startRace() throws Exception {
-		
+		Algorithms algo = new Algorithms();
+		for(Rocket r : this.rockets) {
+			algo.calcAcceleration(this, r);
+			
+			for (int i=0; i<algo.getAccelerations().length(); i++) {
+				r.determinedAccelerationAlgorihtm(i, algo.getAccelerations()[i]);
+				this.seconds++;
+			}
+			algo.erase();
+			this.seconds=0;
+		}
 	}
 
 	private static boolean isSomeoneLeft(Track track) throws Exception {
