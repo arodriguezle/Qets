@@ -5,14 +5,14 @@ import java.util.List;
 import CapaPersistencia.DataFileLoader;
 import domain.*;
 
-public class RocketFactory {
+public class TrackFactory {
 	
 	DataFileLoader dfl;
-	List<Rocket> rockets;
+	List<Rocket> tracks;
 	
-	public RocketFactory() throws Exception {
+	public TrackFactory() throws Exception {
 		dfl = new DataFileLoader();
-		dfl.loadRockets();
-		rockets = dfl.getRockets();
+		dfl.loadTracks();
+		tracks = dfl.getTracks();
 	}
 }
