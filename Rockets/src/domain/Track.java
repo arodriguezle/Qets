@@ -125,6 +125,10 @@ public class Track {
 		this.seconds = 0;
 	}
 
+	public int getBestTime() {
+		return this.bestTime;
+	}
+
 	public List<String> getResults() throws Exception {
 		List<String> results = new ArrayList<String>();
 		String cad = "";
