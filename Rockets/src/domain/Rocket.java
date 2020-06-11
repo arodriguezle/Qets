@@ -65,8 +65,8 @@ public class Rocket {
 			this.propellants.add(p);
 	}
 
-	public void updateSpeed(int time) {
-		this.speed = speed + totalAcceleration * 1;
+	public void updateSpeed() {
+		this.speed = speed + totalAcceleration;
 	}
 
 	public void updatetotalAcceleration() {
@@ -75,23 +75,23 @@ public class Rocket {
 			this.totalAcceleration += p.getActualAcceleration();
 	}
 
-	public void updateDistance(int time) {
-		this.distance = distance + speed + (1 / 2 * totalAcceleration) * Math.pow(time, 2);
+	public void updateDistance() {
+		this.distance = distance + speed + (1d / 2d * (double) totalAcceleration);
 	}
 
 	public void updateGas() throws Exception {
-		this.gasTank.setGas(this.gasTank.getGas() - 0.02 * Math.pow(speed, 2));
+		this.gasTank.setGas(this.gasTank.getGas() - 0.02 * (double) Math.pow(speed, 2));
 	}
 
-	public void update(int time, int acceleration) throws Exception {
+	public void update(int acceleration) throws Exception {
 		if (acceleration <= this.getMaxAceleration())
 			uptdatePropellantsTo(acceleration);
 		else
 			throw new Exception("Acceleration is higher than max acceleration! (" + acceleration + ">"
 					+ this.getMaxAceleration() + ")");
 		updatetotalAcceleration();
-		updateSpeed(time);
-		updateDistance(time);
+		updateSpeed();
+		updateDistance();
 		updateGas();
 	}
 

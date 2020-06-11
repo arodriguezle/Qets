@@ -26,10 +26,10 @@ public class Algorithms {
 			if (rocket.getDistance() < track.getDistance() && rocket.getGas() >= 0) {
 				if (rocket.getGas() - 0.02
 						* Math.pow(rocket.getSpeed() + rocket.getTotalAcceleration() * (track.getSeconds()), 2) > 0) {
-					rocket.update(track.getSeconds(), acceleration);
+					rocket.update(acceleration);
 					this.accelerations[track.getSeconds()] = acceleration;
 				} else {
-					rocket.update(track.getSeconds(), 0);
+					rocket.update(0);
 					this.accelerations[track.getSeconds()] = 0;
 				}
 			} else if (rocket.getGas() <= 0) {

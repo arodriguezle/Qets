@@ -56,7 +56,7 @@ public class Track {
 			moves[index] = moves[index] + "\n" + rocket.toString() + " has finished!";
 			assigneWinner(rocket, index);
 		} else {
-			rocket.update(index, algorithm.getAccelerations()[index]);
+			rocket.update(algorithm.getAccelerations()[index]);
 			moves[index] = moves[index] + "\n" + rocket.toString();
 		}
 	}
