@@ -28,7 +28,7 @@ public class Track {
 	}
 
 	public void startRace() throws Exception {
-		
+
 	}
 
 	private static boolean isSomeoneLeft(Track track) throws Exception {
@@ -77,5 +77,9 @@ public class Track {
 
 	public void addSecond() {
 		this.seconds++;
+	}
+
+	public void reset() {
+		this.seconds = 0;
 	}
 }

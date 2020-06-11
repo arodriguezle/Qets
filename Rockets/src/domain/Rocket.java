@@ -104,7 +104,7 @@ public class Rocket {
 		this.gasTank.setGas(solution.gasRegister.get(time));
 	}
 
-	public double getMaxAceleration() {
+	public int getMaxAceleration() {
 		int maxAcc = 0;
 		for (Propellant p : propellants)
 			if (p.getMaxAcceleration() > maxAcc)
@@ -112,7 +112,7 @@ public class Rocket {
 		return maxAcc;
 	}
 
-	public void determinedAccelerationAlgorihtm(int time, int acceleration) throws Exception {
+	public void determinedAcceleration(int time, int acceleration) throws Exception {
 		if (this.gasTank.getGas() - 0.02 * Math.pow(this.speed + totalAcceleration * (time), 2) > 0) {
 			// if with the new acceleration the gas will be greater than 0
 			if (this.gasTank.getGas() > 0) {

@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.concurrent.TimeUnit;
-
 public class Algorithms {
 
 	private int[] accelerations;
@@ -10,31 +8,69 @@ public class Algorithms {
 
 	}
 
-	public void calcAcceleration(Track track, Rocket rocket) {
+	public void calcAcceleration(Track track, Rocket rocket) throws Exception {
 		accelerations = new int[track.getSeconds()];
-
-	}
-
-	private void tooFastTooFuriousAlgorithm(Track track, Rocket rocket) throws Exception {
-		while (track.getSeconds() <= track.getMaxSeconds()) {
-			System.out.println("Second " + (track.getSeconds()) + ":");
-			if (rocket.getDistance() < track.getDistance()) {
-				if (rocket.getGas() <= 0) {
-					System.out.println(rocket.getName() + ": HAS NO GAS at " + rocket.getDistance());
-				}
-				rocket.determinedAccelerationAlgorihtm((int) track.getSeconds(), 3);
-				System.out.println(rocket.toString());
-			} else {
-				System.out.println(rocket.getName() + ": FINISHED at " + rocket.getDistance() + " with "
-						+ rocket.getGas() + " gas left");
-			}
-			track.addSecond();
-			System.out.println("---");
+		if (track.getMaxSeconds() >= 20) {
+			suaveSuavesitoAlgorithm(track, rocket);
+		} else if (rocket.getMaxAceleration() >= 40) {
+			toFastToFuriusAlgorithm(track, rocket);
+		} else {
+			myNinjaWayAlgorithm(track, rocket, rocket.getMaxAceleration());
 		}
 	}
 
-	private void suaveSuaveSuavesitoAlgorithm(Track track, Rocket rocket) {
+	public int[] getAccelerations() {
+		return this.accelerations;
+	}
 
+	public void erase() {
+		this.accelerations = null;
+	}
+
+	private void toFastToFuriusAlgorithm(Track track, Rocket rocket) throws Exception {
+		while (track.getSeconds() <= track.getMaxSeconds()) {
+			if (rocket.getDistance() < track.getDistance()) {
+				if (rocket.getGas() <= 0) {
+					this.accelerations[track.getSeconds()] = -1;// s'ha kdat sense gas
+				}
+				rocket.determinedAcceleration(track.getSeconds(), rocket.getMaxAceleration());
+				// max in this case
+			} else {
+				this.accelerations[track.getSeconds()] = -2;// ha acabat
+			}
+			track.addSecond();
+		}
+	}
+
+	private void suaveSuavesitoAlgorithm(Track track, Rocket rocket) throws Exception {
+		while (track.getSeconds() <= track.getMaxSeconds()) {
+			if (rocket.getDistance() < track.getDistance()) {
+				if (rocket.getGas() <= 0) {
+					this.accelerations[track.getSeconds()] = -1;// s'ha kdat sense gas
+				}
+				rocket.determinedAcceleration(track.getSeconds(), (int) (rocket.getMaxAceleration() * 0.25));
+				// 0.25 of max speed
+			} else {
+				this.accelerations[track.getSeconds()] = -2;// ha acabat
+			}
+			track.addSecond();
+		}
+	}
+
+	private void myNinjaWayAlgorithm(Track track, Rocket rocket, int acceleration) throws Exception {
+		track.reset();
+		while (track.getSeconds() <= track.getMaxSeconds()) {
+			if (rocket.getDistance() < track.getDistance()) {
+				if (rocket.getGas() <= 0) {
+					if (acceleration <= rocket.getMaxAceleration() && acceleration >= 0)
+						myNinjaWayAlgorithm(track, rocket, acceleration - 1);// no es rendirà
+				}
+				rocket.determinedAcceleration(track.getSeconds(), acceleration);
+			} else {
+				this.accelerations[track.getSeconds()] = -2;// ha acabat
+			}
+			track.addSecond();
+		}
 	}
 
 }
