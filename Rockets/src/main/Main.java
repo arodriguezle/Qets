@@ -1,23 +1,25 @@
 package main;
 
+import java.util.concurrent.TimeUnit;
 import controlator.Controller;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("---LOADING RANDOM TRACK--- ");
+		System.out.println("\n---LOADING RANDOM TRACK---");
 		Controller.initiateTrack();
-		System.out.println("---LOADING ROCKETS--- ");
+		System.out.println(Controller.getTrack());
+		System.out.println("\n------LOADING ROCKETS-----");
 		Controller.initiateRockets();
-		System.out.println("---STARTING RACE--- ");
+		System.out.println("\n-------STARTING RACE------");
 		Controller.startRace();
 		showResults();
-		System.out.println("---RACE FINISHED--- ");
+		System.out.println("\n-------RACE FINISHED------");
 	}
 
 	public static void showResults() throws Exception {
 		for (String s : Controller.getResults()) {
-			// TimeUnit.SECONDS.sleep(1);
+			TimeUnit.SECONDS.sleep(1);
 			System.out.println(s);
 		}
 	}

@@ -9,6 +9,8 @@ public class Track {
 	private int seconds;
 	private int maxSeconds;
 	private List<Rocket> rockets;
+	private Rocket winner;
+	private int bestTime;
 	private String[] moves;
 
 	public Track(String name, double distance, int maxSeconds) throws Exception {
@@ -25,28 +27,50 @@ public class Track {
 		this.rockets = new ArrayList<Rocket>();
 	}
 
+	public Rocket getWinner() {
+		return this.winner;
+	}
+
 	public String toString() {
 		return "Track " + this.name + ": " + this.distance + "m   ||   " + this.maxSeconds + " seconds";
 	}
 
 	public void startRace() throws Exception {
 		inicializeMoves();
-		Algorithms algo = new Algorithms();
+		Algorithms algorithm = new Algorithms();
 		for (Rocket rocket : this.rockets) {
-			algo.calcAcceleration(this, rocket);
-			for (int i = 0; i < algo.getAccelerations().length; i++) {
-				if (algo.getAccelerations()[i] == -1)
-					moves[i] = moves[i] + "\n" + rocket.toString() + " has no gas!";
-				else if (algo.getAccelerations()[i] == -2)
-					moves[i] = moves[i] + "\n" + rocket.toString() + " has finished!";
-				else {
-					rocket.update(i, algo.getAccelerations()[i]);
-					moves[i] = moves[i] + "\n" + rocket.toString();
-				}
+			algorithm.calcAcceleration(this, rocket);
+			for (int i = 0; i < algorithm.getAccelerations().length; i++) {
+				saveMoves(algorithm, i, rocket);
 				this.seconds++;
 			}
-			algo.reset();
+			algorithm.reset();
 			this.seconds = 0;
+		}
+	}
+
+	private void saveMoves(Algorithms algorithm, int index, Rocket rocket) throws Exception {
+		if (algorithm.getAccelerations()[index] == -1)
+			moves[index] = moves[index] + "\n" + rocket.toString() + " has no gas!";
+		else if (algorithm.getAccelerations()[index] == -2) {
+			moves[index] = moves[index] + "\n" + rocket.toString() + " has finished!";
+			assigneWinner(rocket, index);
+		} else {
+			rocket.update(index, algorithm.getAccelerations()[index]);
+			moves[index] = moves[index] + "\n" + rocket.toString();
+		}
+	}
+
+	private void assigneWinner(Rocket rocket, int second) throws Exception {
+		if (winner == null) {
+			winner = rocket;
+			bestTime = second;
+		} else if (bestTime == second) {
+			if (winner.getGas() < rocket.getGas())
+				winner = rocket;
+		} else if (bestTime > second) {
+			winner = rocket;
+			bestTime = second;
 		}
 	}
 
@@ -111,6 +135,7 @@ public class Track {
 		results.add("\nSecond 0: " + cad);
 		for (int i = 0; i < this.moves.length; i++)
 			results.add(this.moves[i]);
+		results.add("\n\nWINNER " + this.winner.getName() + " in " + (bestTime + 1) + " seconds!");
 		return results;
 	}
 }

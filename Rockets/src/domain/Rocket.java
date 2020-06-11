@@ -3,8 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.Backtracking.Solution;
-
 public class Rocket {
 
 	private String name;
@@ -97,12 +95,6 @@ public class Rocket {
 		updateGas();
 	}
 
-	public void updateBack(Solution solution, int time) throws Exception {
-		this.totalAcceleration = solution.acelerationRegister.get(time);
-		this.distance = solution.distanceRegister.get(time);
-		this.gasTank.setGas(solution.gasRegister.get(time));
-	}
-
 	public int getMaxAceleration() {
 		int maxAcc = 0;
 		for (Propellant p : propellants)
@@ -134,4 +126,5 @@ public class Rocket {
 		this.distance = 0;
 		this.stopPropellants();
 	}
+
 }
