@@ -1,20 +1,19 @@
 package application;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import CapaPersistencia.DataFileLoader;
 import domain.*;
 
 public class RocketFactory {
 	
-	public RocketFactory() {
-		
+	DataFileLoader dfl;
+	List<Rocket> rockets;
+	
+	public RocketFactory() throws Exception {
+		dfl = new DataFileLoader();
+		dfl.loadRockets();
+		dfl.loadTracks();
+		rockets = dfl.getRockets();
 	}
-	
-	static List<Rocket> rockets = new ArrayList<Rocket>();
-	int propellantsViperX[] = {};
-	int propellantsFalconIX[] = {};
-	int propellantsStarV[] = {};
-	int propellantsSpeedyV[] = {};
-	
 }
