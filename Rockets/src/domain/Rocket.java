@@ -62,7 +62,7 @@ public class Rocket {
 		return this.totalAcceleration;
 	}
 
-	public void addPropellants(Propellant... propellants) {
+	public void addPropellants(List<Propellant> propellants) {
 		for (Propellant p : propellants)
 			this.propellants.add(p);
 	}

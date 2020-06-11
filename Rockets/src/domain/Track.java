@@ -104,7 +104,6 @@ public class Track {
 			else
 				throw new Exception("Rocket to add on track " + this.name + " is null!");
 		}
-
 	}
 
 	public List<Rocket> getRockets() {

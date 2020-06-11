@@ -1,12 +1,4 @@
-MadMax
-1300
-22
-SpeedTrack
-800
-10
-FreeWorld
-1200
-18
-RisingLap
-900
-15
+MadMax;1300;22
+SpeedTrack;800;10
+FreeWorld;1200;18
+RisingLap;900;15

@@ -39,61 +39,31 @@ public class DataFileLoader {// lector d'arxius persistens per carregar circuits
 	public void loadRockets() throws Exception {// llegir cohets
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(rocketsData), "UTF-8"));
 		String st;
-		int lineCounter = 1;
-		Rocket dummy = null;
-		String rocketName = "";
-		GasTank gasTank = null;
-		Propellant propellant;
 		while ((st = br.readLine()) != null) {
-			if (lineCounter == 1) {
-				rocketName = st;
-			} else if (lineCounter == 2) {
-				gasTank = new GasTank(Double.parseDouble(st));
-			} else {
-				dummy = new Rocket(rocketName, gasTank);
-				if (st.contains(";")) {// varis propulsors
-					String[] splitedValues = st.split(";");
-					for (int i = 0; i < splitedValues.length; i++) {
-						propellant = new Propellant(Integer.parseInt(splitedValues[i]));
-						dummy.addPropellants(propellant);
-					}
-				} else {// un sol propulsor
-					propellant = new Propellant(Integer.parseInt(st));
-					dummy.addPropellants(propellant);
-				}
-				lineCounter = 0;
-			}
-			lineCounter++;
-			if (dummy != null) {
-				this.rockets.add(dummy);
-				dummy = null;
-			}
-
+			GasTank gasTank = new GasTank(Double.parseDouble(st.split(":")[0].split(";")[1]));
+			Rocket dummy = new Rocket(st.split(":")[0].split(";")[0], gasTank);
+			dummy.addPropellants(extractPropellants(st.split(":")[1].split(";")));
+			this.rockets.add(dummy);
 		}
 		br.close();
+	}
+
+	private List<Propellant> extractPropellants(String[] splitedValues) {
+		List<Propellant> propellants = new ArrayList<Propellant>();
+		for (int i = 0; i < splitedValues.length; i++) {
+			Propellant propellant = new Propellant(Integer.parseInt(splitedValues[i]));
+			propellants.add(propellant);
+		}
+		return propellants;
 	}
 
 	public void loadTracks() throws Exception {// llegir circuits
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(tracksData), "UTF-8"));
 		String st;
-		int lineCounter = 1;
-		Track dummy = null;
-		String trackName = "";
-		double trackDistance = 0;
 		while ((st = br.readLine()) != null) {
-			if (lineCounter == 1) {
-				trackName = st;
-			} else if (lineCounter == 2) {
-				trackDistance = Double.parseDouble(st);
-			} else {
-				dummy = new Track(trackName, trackDistance, Integer.parseInt(st));
-				lineCounter = 0;
-			}
-			lineCounter++;
-			if (dummy != null) {
-				this.tracks.add(dummy);
-				dummy = null;
-			}
+			Track dummy = new Track(st.split(";")[0], Double.parseDouble(st.split(";")[1]),
+					Integer.parseInt(st.split(";")[2]));
+			this.tracks.add(dummy);
 		}
 		br.close();
 	}
