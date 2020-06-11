@@ -76,7 +76,7 @@ public class Rocket {
 	}
 
 	public void updateDistance(int time) {
-		this.distance = distance + speed + (1 / 2 * totalAcceleration) * Math.pow(time, 2);
+		this.distance = distance + speed + (1d / 2d * (double)totalAcceleration) * Math.pow(time, 2);
 	}
 
 	public void updateGas() throws Exception {
