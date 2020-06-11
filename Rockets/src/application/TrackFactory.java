@@ -6,10 +6,10 @@ import CapaPersistencia.DataFileLoader;
 import domain.*;
 
 public class TrackFactory {
-	
+
 	DataFileLoader dfl;
-	List<Rocket> tracks;
-	
+	List<Track> tracks;
+
 	public TrackFactory() throws Exception {
 		dfl = new DataFileLoader();
 		dfl.loadTracks();
