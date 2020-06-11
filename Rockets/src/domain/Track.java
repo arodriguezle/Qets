@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import CapaPersistencia.DataFileLoader;
+
 public class Track {
 	private String name;
 	private double distance;
@@ -26,6 +28,10 @@ public class Track {
 	}
 
 	public void startRace(Track track, int algorithm) throws Exception {
+		System.out.println("---LOADING  TRACKS--- ");
+		DataFileLoader dfl = new DataFileLoader();
+		dfl.loadRockets();
+		dfl.loadTracks();
 		System.out.println("---RACE  STARTED--- ");
 		System.out.println("---");
 		boolean someoneLeft = true;
@@ -90,8 +96,6 @@ public class Track {
 			throw new Exception("Rocket to add on track " + this.name + " is null!");
 
 	}
-
-
 
 	public List<Rocket> getRockets() {
 		return this.rockets;
