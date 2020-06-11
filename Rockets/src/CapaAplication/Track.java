@@ -76,7 +76,7 @@ public class Track {
 		return this.distance;
 	}
 
-	public int getSeconds () {
+	public int getSeconds() {
 		return this.seconds;
 	}
 
