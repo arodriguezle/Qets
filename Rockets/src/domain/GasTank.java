@@ -1,4 +1,4 @@
-package CapaAplication;
+package domain;
 
 public class GasTank {
 	private double currentGas;

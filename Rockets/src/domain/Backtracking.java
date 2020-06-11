@@ -1,4 +1,4 @@
-package CapaAplication;
+package domain;
 
 import java.util.ArrayList;
 

@@ -1,9 +1,9 @@
-package CapaAplication;
+package domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import CapaAplication.Backtracking.Solution;
+import domain.Backtracking.Solution;
 
 public class Rocket {
 

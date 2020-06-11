@@ -1,7 +1,8 @@
-package CapaMain;
+package main;
 
-import CapaAplication.*;
 import java.util.Scanner;
+
+import domain.*;
 
 public class Main {
 	private static int DETERMINED_SPEED_ALGORIHTM = 1, BACKTRACKING_ALGORITHM = 2;
