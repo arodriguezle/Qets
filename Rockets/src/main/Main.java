@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 
 import application.RocketFactory;
 import application.TrackFactory;
-import domain.*;
 
 public class Main {
 	private static Scanner scan = new Scanner(System.in);
@@ -16,6 +15,8 @@ public class Main {
 		// TimeUnit.SECONDS.sleep(1);
 		System.out.println("---LOADING RANDOM TRACK--- ");
 
+		// falta hacer el controlador
+		
 		TF = new TrackFactory();
 		Track track = TF.randomTrack();
 
