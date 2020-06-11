@@ -12,6 +12,7 @@ public class Track {
 	private int seconds;
 	private int maxSeconds;
 	private List<Rocket> rockets;
+	private String[] moves;
 
 	public Track(String name, double distance, int maxSeconds) throws Exception {
 		this.name = name;
