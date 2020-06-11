@@ -28,12 +28,6 @@ public class Track {
 	}
 
 	public void startRace() throws Exception {
-		System.out.println("---LOADING  POSSIBLE TRACKS--- ");
-		// aqui factoria de circuitos
-		System.out.println("---LOADING  ROCKETS--- ");
-		// aqui factoria de cohetes
-		System.out.println("---RACE  STARTED--- ");
-		System.out.println("---");
 		boolean someoneLeft = true;
 		while (this.getSeconds() <= this.getMaxSeconds() && someoneLeft == true) {
 			TimeUnit.SECONDS.sleep(1);
