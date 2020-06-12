@@ -17,6 +17,12 @@ public class Main {
 		Controller.startRace();
 		showResults(controller);
 		System.out.println("\n-------RACE FINISHED------");
+		
+		if(controller.getTrack().getBestTime() > ) {
+			Record newRecord = new Record(controller.getTrack().getName(), controller.getTrack().getWinner().getName(),controller.getTrack().getBestTime());
+			 = newRecord;
+		}
+		
 	}
 
 	public static void showResults(Controller controller) throws Exception {
