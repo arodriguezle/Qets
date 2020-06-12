@@ -35,8 +35,8 @@ public class Controller {
 		return track;
 	}
 
-	public void saveNewRecord() {
-		if (track.getBestTime() < RecordRepository.getRecord(track.getName())) {
+	public void saveNewRecord() throws Exception {
+		if (track.getBestTime() < RecordRepository.getRecord(track.getName()).getTime()) {
 			Record newRecord = new domain.Record(track.getName(), track.getWinner().getName(), track.getBestTime());
 			RecordRepository.storeRecord(newRecord);
 		}
