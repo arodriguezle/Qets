@@ -15,19 +15,19 @@ public class Controller {
 		dfl = DataFileLoader.getInstance();
 	}
 
-	public static void startRace() throws Exception {
+	public void startRace() throws Exception {
 		track.startRace();
 	}
 
-	public static void initiateTrack() throws Exception {
+	public void initiateTrack() throws Exception {
 		track = TrackFactory.getTrack(dfl);
 	}
 
-	public static void initiateRockets() throws Exception {
+	public void initiateRockets() throws Exception {
 		track.addRockets(RocketFactory.getRockets(dfl));
 	}
 
-	public static List<String> getResults() throws Exception {
+	public List<String> getResults() throws Exception {
 		return track.getResults();
 	}
 

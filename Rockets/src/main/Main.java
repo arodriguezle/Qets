@@ -9,12 +9,12 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		Controller controller = new Controller();
 		System.out.println("\n---LOADING RANDOM TRACK---");
-		Controller.initiateTrack();
+		controller.initiateTrack();
 		System.out.println(controller.getTrack().toString());
 		System.out.println("\n------LOADING ROCKETS-----");
-		Controller.initiateRockets();
+		controller.initiateRockets();
 		System.out.println("\n-------STARTING RACE------");
-		Controller.startRace();
+		controller.startRace();
 		showResults(controller);
 		System.out.println("\n-------RACE FINISHED------");
 		System.out.println("\n------SAVING RECORDS------");
@@ -23,7 +23,7 @@ public class Main {
 	}
 
 	public static void showResults(Controller controller) throws Exception {
-		for (String s : Controller.getResults()) {
+		for (String s : controller.getResults()) {
 			TimeUnit.SECONDS.sleep(1);
 			System.out.println(s);
 		}
