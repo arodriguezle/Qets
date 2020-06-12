@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import domain.Record;
 
@@ -26,7 +25,7 @@ public class RecordRepository {
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
-			throw new InvalidParamException();
+			throw new Exception();
 		}
 	}
 
@@ -46,14 +45,14 @@ public class RecordRepository {
 				String name = rs.getString("ROCKET");
 				return new Record(id, name, recordURL);
 			}
-			throw new NotFoundException();
+			throw new Exception();
 		}catch(SQLException e) {
 			e.printStackTrace();
-			throw new InvalidParamException();
+			throw new Exception();
 		}
 	}
 	
-	public static void updateRecord(Record record) {
+	public static void updateRecord(Record record) throws Exception {
 		ConnectionBBDD connection = ConnectionRepository.getConnection();
 		
 		try {
@@ -65,11 +64,11 @@ public class RecordRepository {
 			pst.setInt(3, record.getTime());
 			
 			if(pst.executeUpdate() != 1) {
-				throw new NotFoundException();
+				throw new Exception();
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
-			throw new InvalidParamException();
+			throw new Exception();
 		}
 	}
 	
