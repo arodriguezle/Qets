@@ -17,7 +17,6 @@ public class Main {
 		Controller.startRace();
 		showResults(controller);
 		System.out.println("\n-------RACE FINISHED------");
-
 	}
 
 	public static void showResults(Controller controller) throws Exception {
