@@ -29,8 +29,11 @@ public class Controller {
 		return track.getResults();
 	}
 
-	public static String getTrack() {
+	public static String getDataTrack() {
 		return track.toString();
 	}
 
+	public Track getTrack() {
+		return track;
+	}
 }

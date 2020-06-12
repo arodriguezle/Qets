@@ -10,13 +10,14 @@ public class Main {
 		Controller controller = new Controller();
 		System.out.println("\n---LOADING RANDOM TRACK---");
 		Controller.initiateTrack();
-		System.out.println(Controller.getTrack());
+		System.out.println(Controller.getDataTrack());
 		System.out.println("\n------LOADING ROCKETS-----");
 		Controller.initiateRockets();
 		System.out.println("\n-------STARTING RACE------");
 		Controller.startRace();
 		showResults(controller);
 		System.out.println("\n-------RACE FINISHED------");
+
 	}
 
 	public static void showResults(Controller controller) throws Exception {
