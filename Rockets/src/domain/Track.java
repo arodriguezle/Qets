@@ -40,6 +40,7 @@ public class Track {
 		Algorithms algorithm = new Algorithms();
 		for (Rocket rocket : this.rockets) {
 			algorithm.calcAcceleration(this, rocket);
+			rocket.reset();
 			for (int i = 0; i < algorithm.getAccelerations().length; i++) {
 				saveMoves(algorithm, i, rocket);
 				this.seconds++;
@@ -50,13 +51,13 @@ public class Track {
 	}
 
 	private void saveMoves(Algorithms algorithm, int index, Rocket rocket) throws Exception {
+		rocket.update(algorithm.getAccelerations()[index]);
 		if (algorithm.getAccelerations()[index] == -1)
 			moves[index] = moves[index] + "\n" + rocket.toString() + " has no gas!";
 		else if (algorithm.getAccelerations()[index] == -2) {
 			moves[index] = moves[index] + "\n" + rocket.toString() + " has finished!";
 			assigneWinner(rocket, index);
 		} else {
-			rocket.update(algorithm.getAccelerations()[index]);
 			moves[index] = moves[index] + "\n" + rocket.toString();
 		}
 	}

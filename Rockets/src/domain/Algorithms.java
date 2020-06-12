@@ -21,27 +21,37 @@ public class Algorithms {
 	}
 
 	private void myNinjaWayAlgorithm(Track track, Rocket rocket, int acceleration) throws Exception {
-		track.reset();
+		resetAll(rocket, track);
 		while (track.getSeconds() < track.getMaxSeconds()) {
-			if (rocket.getDistance() < track.getDistance() && rocket.getGas() >= 0) {
-				if (rocket.getGas() - 0.02
-						* Math.pow(rocket.getSpeed() + rocket.getTotalAcceleration() * (track.getSeconds()), 2) > 0) {
-					rocket.update(acceleration);
-					this.accelerations[track.getSeconds()] = acceleration;
-				} else {
-					rocket.update(0);
-					this.accelerations[track.getSeconds()] = 0;
-				}
-			} else if (rocket.getGas() <= 0) {
-				if (acceleration <= rocket.getMaxAceleration() && acceleration >= 0) {
-					rocket.reset();
+			if (rocket.getDistance() < track.getDistance() && rocket.getGas() >= 0)
+				if (keepGoing(rocket, track))
+					updateAll(rocket, acceleration, track.getSeconds());
+				else
+					updateAll(rocket, 0, track.getSeconds());
+			else if (rocket.getGas() <= 0) {
+				if (acceleration <= rocket.getMaxAceleration() && acceleration >= 0)
 					myNinjaWayAlgorithm(track, rocket, acceleration - 1);// no es rendirà
-				}
-			} else {
+			} else
 				this.accelerations[track.getSeconds()] = -2;// ha acabat
-			}
 			track.addSecond();
 		}
+	}
+
+	private boolean keepGoing(Rocket rocket, Track track) throws Exception {
+		if (rocket.getGas()
+				- 0.02 * Math.pow(rocket.getSpeed() + rocket.getTotalAcceleration() * (track.getSeconds()), 2) > 0)
+			return true;
+		else
+			return false;
+	}
+
+	private void resetAll(Rocket rocket, Track track) throws Exception {
+		track.reset();
 		rocket.reset();
+	}
+
+	private void updateAll(Rocket rocket, int acceleration, int index) throws Exception {
+		rocket.update(acceleration);
+		this.accelerations[index] = acceleration;
 	}
 }

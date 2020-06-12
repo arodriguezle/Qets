@@ -84,11 +84,7 @@ public class Rocket {
 	}
 
 	public void update(int acceleration) throws Exception {
-		if (acceleration <= this.getMaxAceleration())
-			uptdatePropellantsTo(acceleration);
-		else
-			throw new Exception("Acceleration is higher than max acceleration! (" + acceleration + ">"
-					+ this.getMaxAceleration() + ")");
+		uptdatePropellantsTo(acceleration);
 		updatetotalAcceleration();
 		updateSpeed();
 		updateDistance();

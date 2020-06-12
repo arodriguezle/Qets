@@ -3,18 +3,17 @@ package application;
 import java.util.List;
 
 import domain.Rocket;
-import persistence.DataFileLoader;
+import utilities.DataFileLoader;
 
-public class RocketFactory  {
+public class RocketFactory {
 
-	private List<Rocket> rockets;
+	private static List<Rocket> rockets;
 
-	public RocketFactory(DataFileLoader dfl) throws Exception {
-		dfl.loadRockets();
-		rockets = dfl.getRockets();
-	}
-
-	public List<Rocket> getRockets() {
+	public static List<Rocket> getRockets(DataFileLoader dfl) throws Exception {
+		if (rockets == null) {
+			dfl.loadRockets();
+			rockets = dfl.getRockets();
+		}
 		return rockets;
 	}
 }

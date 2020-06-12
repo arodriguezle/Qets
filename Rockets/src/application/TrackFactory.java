@@ -4,19 +4,18 @@ import java.util.List;
 import java.util.Random;
 
 import domain.Track;
-import persistence.DataFileLoader;
+import utilities.DataFileLoader;
 
 public class TrackFactory {
 
-	private List<Track> tracks;
+	private static List<Track> tracks;
 
-	public TrackFactory(DataFileLoader dfl) throws Exception {
-		dfl.loadTracks();
-		tracks = dfl.getTracks();
-	}
-
-	public Track getRandomTrack() {
+	public static Track getRandomTrack(DataFileLoader dfl) throws Exception {
+		if (tracks == null) {
+			dfl.loadTracks();
+			tracks = dfl.getTracks();
+		}
 		Random rnd = new Random();
-		return this.tracks.get(rnd.nextInt(this.tracks.size()));
+		return tracks.get(rnd.nextInt(tracks.size()));
 	}
 }
