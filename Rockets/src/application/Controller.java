@@ -9,8 +9,8 @@ public class Controller {
 	private static Track track;
 	private static DataFileLoader dfl;
 
-	public Controller() {
-		dfl = new DataFileLoader();
+	public Controller() throws Exception {
+		dfl = DataFileLoader.getInstance();
 	}
 
 	public static void startRace() throws Exception {
@@ -18,7 +18,7 @@ public class Controller {
 	}
 
 	public static void initiateTrack() throws Exception {
-		track = TrackFactory.getRandomTrack(dfl);
+		track = TrackFactory.getTrack(dfl);
 	}
 
 	public static void initiateRockets() throws Exception {
@@ -27,10 +27,6 @@ public class Controller {
 
 	public static List<String> getResults() throws Exception {
 		return track.getResults();
-	}
-
-	public static String getDataTrack() {
-		return track.toString();
 	}
 
 	public Track getTrack() {

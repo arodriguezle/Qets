@@ -8,7 +8,7 @@ public class Algorithms {
 	}
 
 	public void calcAcceleration(Track track, Rocket rocket) throws Exception {
-		accelerations = new int[track.getMaxSeconds()];
+		accelerations = new int[track.getMaxSeconds()+1];
 		myNinjaWayAlgorithm(track, rocket, rocket.getMaxAceleration());
 	}
 
@@ -22,7 +22,7 @@ public class Algorithms {
 
 	private void myNinjaWayAlgorithm(Track track, Rocket rocket, int acceleration) throws Exception {
 		resetAll(rocket, track);
-		while (track.getSeconds() < track.getMaxSeconds()) {
+		while (track.getSeconds() <= track.getMaxSeconds()) {
 			if (rocket.getDistance() < track.getDistance() && rocket.getGas() >= 0)
 				if (keepGoing(rocket, track))
 					updateAll(rocket, acceleration, track.getSeconds());

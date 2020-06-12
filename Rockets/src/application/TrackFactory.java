@@ -1,21 +1,16 @@
 package application;
 
-import java.util.List;
-import java.util.Random;
-
 import domain.Track;
 import utilities.DataFileLoader;
 
 public class TrackFactory {
 
-	private static List<Track> tracks;
+	private static Track track;
 
-	public static Track getRandomTrack(DataFileLoader dfl) throws Exception {
-		if (tracks == null) {
-			dfl.loadTracks();
-			tracks = dfl.getTracks();
+	public static Track getTrack(DataFileLoader dfl) throws Exception {
+		if (track == null) {
+			track = dfl.getRandomTrack();
 		}
-		Random rnd = new Random();
-		return tracks.get(rnd.nextInt(tracks.size()));
+		return track;
 	}
 }

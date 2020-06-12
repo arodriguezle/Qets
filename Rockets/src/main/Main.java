@@ -10,7 +10,7 @@ public class Main {
 		Controller controller = new Controller();
 		System.out.println("\n---LOADING RANDOM TRACK---");
 		Controller.initiateTrack();
-		System.out.println(Controller.getDataTrack());
+		System.out.println(controller.getTrack().toString());
 		System.out.println("\n------LOADING ROCKETS-----");
 		Controller.initiateRockets();
 		System.out.println("\n-------STARTING RACE------");

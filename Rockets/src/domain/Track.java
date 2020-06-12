@@ -51,15 +51,15 @@ public class Track {
 	}
 
 	private void saveMoves(Algorithms algorithm, int index, Rocket rocket) throws Exception {
-		rocket.update(algorithm.getAccelerations()[index]);
-		if (algorithm.getAccelerations()[index] == -1)
+		if (algorithm.getAccelerations()[index] == -1) {
 			moves[index] = moves[index] + "\n" + rocket.toString() + " has no gas!";
-		else if (algorithm.getAccelerations()[index] == -2) {
+		} else if (algorithm.getAccelerations()[index] == -2) {
 			moves[index] = moves[index] + "\n" + rocket.toString() + " has finished!";
-			assigneWinner(rocket, index);
+			assigneWinner(rocket, index - 1);
 		} else {
 			moves[index] = moves[index] + "\n" + rocket.toString();
 		}
+		rocket.update(algorithm.getAccelerations()[index]);
 	}
 
 	private void assigneWinner(Rocket rocket, int second) throws Exception {
@@ -76,9 +76,9 @@ public class Track {
 	}
 
 	private void inicializeMoves() {
-		this.moves = new String[this.maxSeconds];
+		this.moves = new String[this.maxSeconds + 1];
 		for (int i = 0; i < moves.length; i++)
-			moves[i] = "\nSecond " + (i + 1) + ":";
+			moves[i] = "\nSecond " + (i) + ":";
 	}
 
 	public String getName() {
@@ -132,12 +132,6 @@ public class Track {
 
 	public List<String> getResults() throws Exception {
 		List<String> results = new ArrayList<String>();
-		String cad = "";
-		for (Rocket rocket : this.rockets) {
-			rocket.reset();
-			cad = cad + "\n" + rocket.toString();
-		}
-		results.add("\nSecond 0: " + cad);
 		for (int i = 0; i < this.moves.length; i++)
 			results.add(this.moves[i]);
 		results.add("\n\nWINNER " + this.winner.getName() + " in " + (bestTime + 1) + " seconds!");

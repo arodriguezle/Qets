@@ -84,11 +84,13 @@ public class Rocket {
 	}
 
 	public void update(int acceleration) throws Exception {
-		uptdatePropellantsTo(acceleration);
-		updatetotalAcceleration();
-		updateSpeed();
-		updateDistance();
-		updateGas();
+		if (acceleration >= 0) {// this means it has gas and has no ended
+			uptdatePropellantsTo(acceleration);
+			updatetotalAcceleration();
+			updateSpeed();
+			updateDistance();
+			updateGas();
+		}
 	}
 
 	public int getMaxAceleration() {

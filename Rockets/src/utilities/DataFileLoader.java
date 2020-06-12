@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import domain.*;
 
@@ -14,26 +15,36 @@ public class DataFileLoader {// lector d'arxius persistens per carregar circuits
 	private List<Rocket> rockets;
 	private File rocketsData, tracksData;
 	private static final String rocketsFileName = "rockets.txt", tracksFileName = "tracks.txt";
+	private static DataFileLoader instance = null;
 
-	public DataFileLoader() {
+	private DataFileLoader() throws Exception {
 		this.tracks = new ArrayList<Track>();
 		this.rockets = new ArrayList<Rocket>();
 		rocketsData = new File(rocketsFileName);
 		tracksData = new File(tracksFileName);
 	}
 
-	public List<Track> getTracks() throws Exception {
-		if (this.tracks.isEmpty() == false)
-			return this.tracks;
-		else
-			throw new Exception("No hi ha circuits carregats!!!");
+	public static DataFileLoader getInstance() throws Exception {
+		if (instance == null)
+			instance = new DataFileLoader();
+		return instance;
+	}
+
+	public Track getRandomTrack() throws Exception {
+		if (instance == null)
+			instance = getInstance();
+		if (tracks.size() == 0)
+			instance.loadTracks();
+		Random rnd = new Random();
+		return tracks.get(rnd.nextInt(tracks.size()));
 	}
 
 	public List<Rocket> getRockets() throws Exception {
-		if (this.rockets.isEmpty() == false)
-			return this.rockets;
-		else
-			throw new Exception("No hi ha cohets carregats!!!");
+		if (instance == null)
+			instance = getInstance();
+		if (rockets.size() == 0)
+			instance.loadRockets();
+		return instance.rockets;
 	}
 
 	public void loadRockets() throws Exception {// llegir cohets
