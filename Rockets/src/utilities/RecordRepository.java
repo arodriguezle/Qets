@@ -34,7 +34,7 @@ public class RecordRepository {
 		ConnectionBBDD connection = ConnectionRepository.getConnection();
 		
 		try {
-			String sql = "SELECT * FROM RECORDS WHERE ID=?";
+			String sql = "SELECT * FROM RECORDS WHERE TRACK=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.clearParameters();
 			preparedStatement.setString(1, idRecord);
@@ -54,7 +54,17 @@ public class RecordRepository {
 	}
 	
 	public static void updateRecord(Record record) {
+		ConnectionBBDD connection = ConnectionRepository.getConnection();
 		
+		try {
+			String sql = "UPDATE RECORDS SET TRACK=?, ROCKET=?, NAME=? WHERE TRACK=?";
+			
+			}
+			throw new NotFoundException();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new InvalidParamException();
+		}
 	}
 	
 }
