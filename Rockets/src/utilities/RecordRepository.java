@@ -57,10 +57,16 @@ public class RecordRepository {
 		ConnectionBBDD connection = ConnectionRepository.getConnection();
 		
 		try {
-			String sql = "UPDATE RECORDS SET TRACK=?, ROCKET=?, NAME=? WHERE TRACK=?";
+			String sql = "UPDATE RECORDS SET TRACK=?, ROCKET=?, TIME=? WHERE TRACK=?";
+			PreparedStatement pst = connection.prepareStatement(sql);
 			
+			pst.setString(1, record.getTrackName());
+			pst.setString(2, record.getRocketName());
+			pst.setInt(3, record.getTime());
+			
+			if(pst.executeUpdate() != 1) {
+				throw new NotFoundException();
 			}
-			throw new NotFoundException();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			throw new InvalidParamException();
