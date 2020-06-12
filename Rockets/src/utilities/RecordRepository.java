@@ -14,7 +14,7 @@ public class RecordRepository {
 		try {
 			ConnectionBBDD connection = ConnectionRepository.getConnection();
 			
-			String sql = "Insert into REDCORDS (TRACK, ROCKET, TIME) VALUES (?, ?, ?)";
+			String sql = "Insert into RECORDS (TRACK, ROCKET, TIME) VALUES (?, ?, ?)";
 			PreparedStatement pst = connection.prepareStatement(sql);
 			pst.setString(1, record.getTrackName());
 			pst.setString(2, record.getRocketName());
