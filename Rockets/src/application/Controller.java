@@ -3,7 +3,9 @@ package application;
 import java.util.List;
 
 import domain.Track;
+import domain.Record;
 import utilities.DataFileLoader;
+import utilities.RecordRepository;
 
 public class Controller {
 	private static Track track;
@@ -31,5 +33,12 @@ public class Controller {
 
 	public Track getTrack() {
 		return track;
+	}
+
+	public void saveNewRecord() {
+		if (track.getBestTime() < RecordRepository.getRecord(track.getName())) {
+			Record newRecord = new domain.Record(track.getName(), track.getWinner().getName(), track.getBestTime());
+			RecordRepository.storeRecord(newRecord);
+		}
 	}
 }

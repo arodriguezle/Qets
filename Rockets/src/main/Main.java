@@ -17,12 +17,9 @@ public class Main {
 		Controller.startRace();
 		showResults(controller);
 		System.out.println("\n-------RACE FINISHED------");
-		
-		if(controller.getTrack().getBestTime() < RecordRepository.getRecord(id)) {
-			Record newRecord = new Record(controller.getTrack().getName(), controller.getTrack().getWinner().getName(),controller.getTrack().getBestTime());
-			RecordRepository.storeRecord(newRecord);
-		}
-		
+		System.out.println("\n------SAVING RECORDS------");
+		controller.saveNewRecord();
+		System.out.println("\n-------RECORDS SAVED------");
 	}
 
 	public static void showResults(Controller controller) throws Exception {
