@@ -18,9 +18,9 @@ public class Main {
 		showResults(controller);
 		System.out.println("\n-------RACE FINISHED------");
 		
-		if(controller.getTrack().getBestTime() > ) {
+		if(controller.getTrack().getBestTime() < RecordRepository.getRecord(id)) {
 			Record newRecord = new Record(controller.getTrack().getName(), controller.getTrack().getWinner().getName(),controller.getTrack().getBestTime());
-			 = newRecord;
+			RecordRepository.storeRecord(newRecord);
 		}
 		
 	}
